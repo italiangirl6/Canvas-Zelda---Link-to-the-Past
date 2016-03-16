@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="19" height="13" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Inner" tilewidth="32" tileheight="32">
+  <image source="../img/tilesets/LightWorld_LinksHouse_Inner.png" width="640" height="384"/>
+ </tileset>
+ <tileset firstgid="241" name="test" tilewidth="32" tileheight="32">
+  <image source="../img/tilesets/pics0.png" width="2048" height="512"/>
+ </tileset>
+ <layer name="Floor" width="19" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUDzsMAOJ7APg=
+  </data>
+ </layer>
+ <layer name="Walls" width="19" height="13">
+  <data encoding="base64" compression="zlib">
+   eJyN0blOAlEUxvEroIIFdi6AFtrigmsLaAIkxs5ExS12JiqylTYCgi+gPoP6DOprWcGfeEgON2HunORXzJdzv8ydCRljQh7OcSEuJTtFEWdqbxxzDmVURFWye5TwoPbmkXRo4Vm0JXtCA021t4JVrGEdAQRxgEPjbyYwiTAimLK6rnA94mwNdasrimksYNHq8poOXpAe+3+OYQnLSGFDumYw6+h6DAw/97t2sGuGv5efGdzxGCfSFUdiRNefR9fgjre4s7qy2MO+z/eyR3dllE1sYVtlr3jDu2Ov70jJIY+Cyj7wiS+VdeWHF6zzNw7f+MGvj90eNeYxAA==
+  </data>
+ </layer>
+</map>

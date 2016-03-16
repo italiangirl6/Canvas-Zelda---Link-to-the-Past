@@ -1,0 +1,24 @@
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+
+
+canvas {
+    border: 1px solid #000;
+    height: 550px;
+    margin: 1px auto;
+    width: 693px;
+}
+#tinCan {
+    // border: 1px solid red;
+    margin: auto 6px;
+}
+
+.CanvasContainer {
+    margin: 45px auto;
+    width: 694px;
+}
+.GameVersionNumber {
+    text-align: right;
+}
