@@ -10,7 +10,7 @@ Woah! (Falling sprite picture - because it is funny) > W
 TODO
 --------------
 Getting basic functionality scripted
-	- Ruby Counter for header bar
+	- Ruby Counter for header bar <br/>
 	- Menu Dropdown
 	- God Mode > Console command call
 	- Keyboard Customize Maper
