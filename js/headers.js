@@ -99,12 +99,14 @@ var ItemsPath = "./img/tilesets/Items.png";
      			"count": 147 },
      			//
      			// Based off hero_charmap.png -- raw has layer of each slide
+     			//  Using Item.png tileset
      			// ---------------------------------
      "animations":{	
      				"SelectedItem_Shroom": [0],
      				"SelectedItem_EmptyBow": [1],
      				"SelectedItem_BowArrow": [2],
      				"SelectedItem_BlueBoomerang": [13],
+     				"SelectedItem_RubyIcon": [99],
      				"SelectedItem_Nothing":	[104]
      				}
      	});
@@ -140,6 +142,23 @@ var ItemsPath = "./img/tilesets/Items.png";
      	
      	
      	}
+     	
+
+     
+     
+
+     	function LoadHeader_ItemsCounters(){
+     		RubyItemHeaderSprite = new createjs.Sprite(HeroSpriteSelectedItemContainer, "SelectedItem_RubyIcon");
+     		RubyItemHeaderSprite.y = 2;
+     		RubyItemHeaderSprite.x = MagicBarConatinerTopRight.x + 86;
+     		RubyItemHeaderSprite.stop();
+     	}
+     	
+// *************** Rubies *************************
+        var RubyCount = 000;
+        var RubiesHeader = new createjs.Text("Hello World", "20px Arial", "#ff7700");
+        RubiesHeader.x = 100;
+        RubiesHeader.textBaseline = "alphabetic";
 
 // *************** Hearts *************************
 	var HeroSpriteHeartsPath = "./img/Hearts.png";

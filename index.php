@@ -60,12 +60,21 @@ function handleTick(event) {
      LifeHeaderText = new createjs.Text("------- Life -------", "20px Return of Ganon", "#ff7700");
 	 LifeHeaderText.x = 336;
 	 LifeHeaderText.y = 9;
+
+     // Header Rubies
+     var rubyCount = 666;
+     RubyCountText = new createjs.Text(rubyCount, "16px Return of Ganon", "#ff7700");
+     RubyCountText.x = 116;
+     RubyCountText.y = 29;
      
 	// Load Magic Bar Container:
 	Load_MagicBarContainer(0, 0);
      
      // Load Item Selected Container
      LoadHeader_ItemContainer();
+
+     // Load Item Header Icons
+     LoadHeader_ItemsCounters();
      
      // engine.js & characters.js - How Main Character is Printed & Walks
      HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
@@ -87,7 +96,7 @@ function handleTick(event) {
 	 SelectedItemBottomLeftSprite, SelectedItemBottomRightSprite,
 	 SelectedItem,
 	 
-	 LifeHeaderText);
+	 LifeHeaderText, RubyCountText, RubyItemHeaderSprite);
 
 // *************** Listen to Human Actions *************************
 
