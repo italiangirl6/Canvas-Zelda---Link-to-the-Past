@@ -87,9 +87,28 @@ var ItemsPath = "./img/tilesets/Items.png";
      				"SelectedItemContainerTopLeft":	[95],
      				"SelectedItemContainerTopRight": [96],
      				"SelectedItemContainerBottomLeft": [121],
-     				"SelectedItemContainerBottomRight": [122]
+     				"SelectedItemContainerBottomRight": [122],
+     				"HeaderIconRuby": [123]
      				}
      	});
+	ZeldaItems = new createjs.SpriteSheet({
+		  "images": [ItemsPath],
+	      "frames": {"regX": BarX, "regY": BarY, 
+	     			"width": 20, "height": 20,
+	     			"count": 147 },
+	     			//
+	     			// Based off hero_charmap.png -- raw has layer of each slide
+	     			// ---------------------------------
+	     "animations":{	
+	     				"SelectedItemContainerTopLeft":	[95],
+	     				"SelectedItemContainerTopRight": [96],
+	     				"HeaderIconRuby": [97],
+	     				"HeaderIconBomb": [98],
+	     				"HeaderIconArrow": [99],
+	     				"SelectedItemContainerBottomLeft": [121],
+	     				"SelectedItemContainerBottomRight": [122],
+	     				}
+	});
      	
 	// Selected Item
 	HeroSpriteSelectedItem = new createjs.SpriteSheet({
@@ -142,23 +161,24 @@ var ItemsPath = "./img/tilesets/Items.png";
      	
      	
      	}
-     	
-
-     
-     
 
      	function LoadHeader_ItemsCounters(){
-     		RubyItemHeaderSprite = new createjs.Sprite(HeroSpriteSelectedItemContainer, "SelectedItem_RubyIcon");
+     		RubyItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconRuby");
      		RubyItemHeaderSprite.y = 2;
      		RubyItemHeaderSprite.x = MagicBarConatinerTopRight.x + 86;
      		RubyItemHeaderSprite.stop();
+     		
+     		BombItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconBomb");
+     		BombItemHeaderSprite.y = 2;
+     		BombItemHeaderSprite.x = RubyItemHeaderSprite.x + 41;
+     		BombItemHeaderSprite.stop();
+     		
+     		ArrowItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconArrow");
+     		ArrowItemHeaderSprite.y = 2;
+     		ArrowItemHeaderSprite.x = BombItemHeaderSprite.x + 38;
+     		ArrowItemHeaderSprite.stop();
      	}
      	
-// *************** Rubies *************************
-        var RubyCount = 000;
-        var RubiesHeader = new createjs.Text("Hello World", "20px Arial", "#ff7700");
-        RubiesHeader.x = 100;
-        RubiesHeader.textBaseline = "alphabetic";
 
 // *************** Hearts *************************
 	var HeroSpriteHeartsPath = "./img/Hearts.png";

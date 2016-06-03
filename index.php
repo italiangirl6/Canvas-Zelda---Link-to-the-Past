@@ -1,5 +1,5 @@
 <?php
-$name	 = "Canvas Mess!"; 
+$name	 = "Canvas Legend of Zelda - A Link to the Past"; 
 $version = "0.0.1";
 # echo "Canvas Mess!";
 ?>
@@ -61,11 +61,23 @@ function handleTick(event) {
 	 LifeHeaderText.x = 336;
 	 LifeHeaderText.y = 9;
 
-     // Header Rubies
+     // Header Rubies Text
      var rubyCount = 666;
      RubyCountText = new createjs.Text(rubyCount, "16px Return of Ganon", "#ff7700");
      RubyCountText.x = 116;
      RubyCountText.y = 29;
+
+     // Header Bombs Text
+     var bombCount = 10;
+     BombCountText = new createjs.Text(bombCount, "16px Return of Ganon", "#ff7700");
+     BombCountText.x = RubyCountText.x + 46;
+     BombCountText.y = RubyCountText.y;
+
+     // Header Arrows Text
+     var ArrowCount = 69;
+     ArrowCountText = new createjs.Text(bombCount, "16px Return of Ganon", "#ff7700");
+     ArrowCountText.x = BombCountText.x + 38;
+     ArrowCountText.y = RubyCountText.y;
      
 	// Load Magic Bar Container:
 	Load_MagicBarContainer(0, 0);
@@ -96,7 +108,8 @@ function handleTick(event) {
 	 SelectedItemBottomLeftSprite, SelectedItemBottomRightSprite,
 	 SelectedItem,
 	 
-	 LifeHeaderText, RubyCountText, RubyItemHeaderSprite);
+	 LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
+	 RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite);
 
 // *************** Listen to Human Actions *************************
 
