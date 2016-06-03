@@ -17,7 +17,6 @@ TODO
 --------------
 Getting basic functionality scripted <br/>
 	- Request Setup PHP for IIS<br/>
-	- Ruby Counter for header bar <br/>
 	- Menu Dropdown<br/>
 	- God Mode > Console command call<br/>
 	- Keyboard Customize Maper<br/>
