@@ -11,35 +11,33 @@ $version = "0.0.1";
 <!-- Game Design Engines -->
    <script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
    <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
-	
-	    
-    	<!-- Fonts -->
-	<link href="fonts/LinkToPastFont_Snes" rel="stylesheet" type="text/css" />
-	
-	<script src="js/engine.js"></script>
 
-<!-- Set Keyboard Controls -->
+<link href="fonts/LinkToPastFont_Snes" rel="stylesheet" type="text/css" />
+<link href="css/customStyles.css" rel="stylesheet" type="text/css" />
+
+<script src="js/engine.js"></script>
 <script src="js/controls.js"></script>
 
+<!-- Headers to Game -->
+<script type="text/javascript" src="js/headers.js"></script>
+
+<!-- Init -->
     <script>
-    
     // Load Engine
     zelda.init();
     
     // Load Controls
     zelda.controls();
-    
-    
-        var stage, HeroPlay0, Hearts0, Hearts1, Hearts1,
-        MagicBarConatinerTop, MagicBarConatinerBottom,
-         action;
+
+    // Set Placeholders
+    zelda.stageSetup();
         
-        // For Window events
-        var e=window.event || e
-        
-        // Main Character's Default Location
-        var playerStartY = -96,
-        	playerStartX = -63;
+    // For Window events
+    var e=window.event || e
+
+    // Main Character's Default Location
+    var playerStartY = -96;
+    var playerStartX = -63;
 
 // *************** Run Engine
 function init() {
@@ -54,66 +52,12 @@ createjs.Ticker.addEventListener("tick", handleTick);
 function handleTick(event) {
   stage.update();
 }
-// *************** Set Sprites *************************
-     
-     // Header Life
-     LifeHeaderText = new createjs.Text("------- Life -------", "20px Return of Ganon", "#ff7700");
-	 LifeHeaderText.x = 336;
-	 LifeHeaderText.y = 9;
-
-     // Header Rubies Text
-     var rubyCount = 666;
-     RubyCountText = new createjs.Text(rubyCount, "16px Return of Ganon", "#ff7700");
-     RubyCountText.x = 116;
-     RubyCountText.y = 29;
-
-     // Header Bombs Text
-     var bombCount = 10;
-     BombCountText = new createjs.Text(bombCount, "16px Return of Ganon", "#ff7700");
-     BombCountText.x = RubyCountText.x + 46;
-     BombCountText.y = RubyCountText.y;
-
-     // Header Arrows Text
-     var ArrowCount = 69;
-     ArrowCountText = new createjs.Text(bombCount, "16px Return of Ganon", "#ff7700");
-     ArrowCountText.x = BombCountText.x + 38;
-     ArrowCountText.y = RubyCountText.y;
-     
-	// Load Magic Bar Container:
-	Load_MagicBarContainer(0, 0);
-     
-     // Load Item Selected Container
-     LoadHeader_ItemContainer();
-
-     // Load Item Header Icons
-     LoadHeader_ItemsCounters();
-     
-     // engine.js & characters.js - How Main Character is Printed & Walks
-     HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
- 
-     // headers.js - Hearts Section
-     Hearts0 = new createjs.Sprite(HeroSpriteHearts0, "HeartFull");
-     Hearts1 = new createjs.Sprite(HeroSpriteHearts1, "HeartHalf");
-     Hearts2 = new createjs.Sprite(HeroSpriteHearts2, "HeartEmpty");
- 
 
 // *************** Add Objects to Canvas *************************
-	stage.addChild(HeroPlay0, Hearts0, Hearts1, Hearts2,
-	 MagicBarConatinerTopLeft, MagicBarConatinerTopRight,
-	 MagicBarConatinerMiddleLeft, MagicBarConatinerMiddleRight,
-	 MagicBarConatinerMiddleLeft0, MagicBarConatinerMiddleRight0,
-	 MagicBarConatinerBottomLeft, MagicBarConatinerBottomRight,
-	 
-	 SelectedItemTopLeftSprite, SelectedItemTopRightSprite,
-	 SelectedItemBottomLeftSprite, SelectedItemBottomRightSprite,
-	 SelectedItem,
-	 
-	 LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
-	 RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite);
-
+zelda.stageHeader();
+zelda.stageLoad();
 // *************** Listen to Human Actions *************************
 
-		// Click Mouse - Change Sprite to walk down	
 		// Dependant controls.js
 		 window.addEventListener("keydown", checkKeyDown);
 	  // window.addEventListener("keypress", checkKeyPress);
@@ -122,19 +66,11 @@ function handleTick(event) {
 }
 
     </script>
-	
+
 	<!-- Character Sprites -->
 	<script type="text/javascript" src="js/characters.js"></script>
-	
-	<!-- Headers to Game -->
-	<script type="text/javascript" src="js/headers.js"></script>
-	
-	<!-- CSS Crap -->
-    <link href="css/customStyles.css" rel="stylesheet" type="text/css" />
 
-	
-	
-  </head> 
+</head>
 <body onload="init()">
   
 <div id="tinCan">
