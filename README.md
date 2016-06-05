@@ -16,7 +16,7 @@ Woah! (Falling sprite picture - because it is funny) > W
 TODO
 --------------
 Getting basic functionality scripted <br/>
-	- Request Setup PHP for IIS<br/>
+	- Request tutorial Setup PHP for IIS<br/>
 	- Menu Dropdown<br/>
 	- God Mode > Console command call<br/>
 	- Keyboard Customize Maper<br/>
