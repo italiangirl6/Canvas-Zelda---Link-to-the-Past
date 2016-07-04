@@ -10,6 +10,7 @@ Should work in any Browser & Smart Device <br/>
 
 Controls (Default)
 --------------
+Sword Attack > Space Bar (Known bug - sets action to idle right)<br/>
 Movement > Arrow Keys<br/>
 Woah! (Falling sprite picture - because it is funny) > W 
 
