@@ -1,13 +1,37 @@
  
  // Dependant on Multiple Detect
 var keys = [];
+var charAnimation;
+var matrixStats;
 
+// Key Released - Keep on Top
+// This will assist in setting Idle when attack is finished
 function checkKeyUp(e){
-	
+
 	switch(e.keyCode){
 		case 37: // Left Arrow Release
 				console.log("Left key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleLeft");
+		break;
+		case 32: // Space Bar Release
+				console.log("Space key was Released");
+
+                matrixStats =  charAnimation;
+                console.log("Log > " + matrixStats);
+                if(charAnimation = "Hero0SwordRight"){
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleRight");
+                } else if(charAnimation = "Hero0SwordDown"){
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleDown_Shield");
+                    charAnimation = "Hero0WalkIdleDown_Shield"
+                } else if(charAnimation = "Hero0SwordLeft"){
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleLeft");
+                } else if(charAnimation = "Hero0SwordUp"){
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleUp");
+                }
+
+                matrixStats =  charAnimation;
+                console.log("After Animqtion > " + matrixStats);
+
 		break;
 		case 39: // Right Arrow Release
 				console.log("Right key was Released");
@@ -22,16 +46,16 @@ function checkKeyUp(e){
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleUp");
 		break;
 	}
-	
+
 	// Dependant on Multiple Keystroke Detection
 	keys[e.keyCode] = false;
 }
 
 
-
+// Key Held Down
 function checkKeyDown(e) {
 	// Default Current state
-	var charAnimation = HeroPlay0.currentAnimation;
+	charAnimation = HeroPlay0.currentAnimation;
 	
 	// Store an entry for every key pressed
 	// This is dependant on Multiple Key Stroke Detection
@@ -46,12 +70,29 @@ function checkKeyDown(e) {
 			 	console.log("w key was pressed");
 				charAnimation = "Hero0FallWhooooooaaaoowh";
 		break;
-		
+
+        case 32: // Space Key Pressed
+                console.log("Space key was pressed");
+                matrixStats =  charAnimation;
+                console.log("Log > " + matrixStats);
+                if(charAnimation == "Hero0WalkIdleUp"){
+                    charAnimation = "Hero0SwordUp";
+                } else if(charAnimation == "Hero0WalkIdleDown_Shield"){
+                    charAnimation = "Hero0SwordDown";
+                }   else if(charAnimation == "Hero0WalkIdleLeft"){
+                    charAnimation = "Hero0SwordLeft";
+                }
+                else if(charAnimation == "Hero0WalkIdleRight"){
+                    charAnimation = "Hero0SwordRight";
+                }
+
+        break;
+
 		case 37: // Left Arrow Key Pressed
 				console.log("Left key was pressed");
 				// HeroPlay0.gotoAndPlay("Hero0WalkLeft");
 		  		HeroPlay0.x += -charWalkSpeed;
-				  charAnimation = "Hero0WalkLeft";
+				charAnimation = "Hero0WalkLeft";
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
@@ -84,8 +125,8 @@ function checkKeyDown(e) {
 			// Diagnal Down left
 			if(keys[40] && keys[37]){
 				console.log("Down & Left key was pressed");
-			 	HeroPlay0.y += charWalkSpeed;
-			 	HeroPlay0.x += -charWalkSpeed;
+			 	HeroPlay0.y += (charWalkSpeed - 1);
+			 	HeroPlay0.x += (-charWalkSpeed - 1);
 			 	charAnimation = "Hero0WalkDown";
 			}
 			
@@ -112,6 +153,7 @@ function checkKeyDown(e) {
 			
 }
 
+// Key Pressed
 function checkKeyPress(e) {
 	
 	switch(e.keyCode){
@@ -119,7 +161,19 @@ function checkKeyPress(e) {
 			 	console.log("w key was pressed");
 				HeroPlay0.gotoAndPlay("Hero0FallWhooooooaaaoowh");
 		break;
-		
+
+        case 32: // Space Key Pressed
+                console.log("Space key was pressed");
+                if(charAnimation == "Hero0WalkIdleDown_Shield"){
+                    HeroPlay0.gotoAndPlay("Hero0SwordDown");
+                    charAnimation = "Hero0WalkIdleDown_Shield"
+                } else if(charAnimation == "Hero0WalkIdleRight"){
+                    HeroPlay0.gotoAndPlay("Hero0SwordRight");
+                }
+                matrixStats = charAnimation;
+                console.log("Character Sprite > " + matrixStats);
+        break;
+
 		case 37: // Left Arrow Key Pressed
 				console.log("Left key was pressed");
 				HeroPlay0.x += -charWalkSpeed;
@@ -142,3 +196,4 @@ function checkKeyPress(e) {
 		break;
 	}
 }
+

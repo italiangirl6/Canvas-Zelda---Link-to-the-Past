@@ -69,7 +69,9 @@ zelda.stageLoad();
 
 	<!-- Character Sprites -->
 	<script type="text/javascript" src="js/characters.js"></script>
+<script>
 
+</script>
 </head>
 <body onload="init()">
   

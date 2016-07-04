@@ -25,7 +25,7 @@ var ItemsPath = "./img/tilesets/Items.png";
      	});
      	
      	
-     	function Load_MagicBarContainer(MoveBarX, MoveBarY){
+    function Load_MagicBarContainer(MoveBarX, MoveBarY){
      	
      	     // Magic Bar
      var MagicBarMoveY = MoveBarY;
