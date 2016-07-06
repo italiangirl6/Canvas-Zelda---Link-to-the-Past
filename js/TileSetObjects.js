@@ -1,23 +1,26 @@
 // Items Tileset location
-var ItemsPath = "./img/tilesets/Items.png";
+var ObjectsPath = "./img/tilesets/Items.png";
+TilesetObjects = new createjs.SpriteSheet({
+  "images": [ObjectsPath],
+  "frames": {
+            "width": 20, "height": 20,
+            "count": 147 },
+            //
+            // Based off hero_charmap.png -- raw has layer of each slide
+            // ---------------------------------
+ "animations":{
+                "Ruby":	[35]
+                }
+    });
+var TileObjects = {
 
 
-	TilesetObjects = new createjs.SpriteSheet({
-	  "images": [ItemsPath],
-      "frames": {
-     			"width": 20, "height": 20,
-     			"count": 147 },
-     			//
-     			// Based off hero_charmap.png -- raw has layer of each slide
-     			// ---------------------------------
-     "animations":{
-     				"Ruby":	[35]
-     				}
-     	});
-
-    function DropObject(Object, XCoordinates, YCoordinates){
-    DropSpecificItem = new createjs.Sprite(TilesetObjects, "Ruby");
+    itemDrop: function (Object, XCoordinates, YCoordinates){
+    DropSpecificItem = new createjs.Sprite(TilesetObjects, Object);
     DropSpecificItem.x = XCoordinates;
     DropSpecificItem.y = YCoordinates;
+    stage.addChild(DropSpecificItem);
+    zelda.stageUpdate();
 
     }
+};

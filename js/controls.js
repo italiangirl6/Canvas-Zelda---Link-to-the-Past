@@ -18,15 +18,20 @@ function checkKeyUp(e){
 
                 matrixStats =  charAnimation;
                 console.log("Log > " + matrixStats);
-                if(charAnimation = "Hero0SwordRight"){
-                    HeroPlay0.gotoAndPlay("Hero0WalkIdleRight");
-                } else if(charAnimation = "Hero0SwordDown"){
-                    HeroPlay0.gotoAndPlay("Hero0WalkIdleDown_Shield");
-                    charAnimation = "Hero0WalkIdleDown_Shield"
-                } else if(charAnimation = "Hero0SwordLeft"){
-                    HeroPlay0.gotoAndPlay("Hero0WalkIdleLeft");
-                } else if(charAnimation = "Hero0SwordUp"){
+
+                switch(charAnimation){
+                    case "Hero0SwordUp":
                     HeroPlay0.gotoAndPlay("Hero0WalkIdleUp");
+                    break;
+                    case "Hero0SwordDown":
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleDown_Shield");
+                    break;
+                    case "Hero0SwordRight":
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleRight");
+                    break;
+                    case "Hero0SwordLeft":
+                    HeroPlay0.gotoAndPlay("Hero0WalkIdleLeft");
+                    break;
                 }
 
                 matrixStats =  charAnimation;

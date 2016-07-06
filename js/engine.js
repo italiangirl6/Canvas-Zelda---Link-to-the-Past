@@ -12,19 +12,22 @@ var zelda = {
 		createjs.Ticker.setFPS(11);
 		createjs.Ticker.addEventListener("tick", handleTick);
 		function handleTick(event) {
- 		 stage.update();
+ 		    zelda.stageUpdate();
 		}
 	},
-
+    stageUpdate: function(){
+        stage.update();
+    },
 	controls: function() {
-				
+		// Dependant controls.js
+		 window.addEventListener("keydown", checkKeyDown);
+	  // window.addEventListener("keypress", checkKeyPress);
+		 window.addEventListener("keyup", checkKeyUp);
 	
 	},
 	stageSetup: function(){
 	        var stage, HeroPlay0, Hearts0, Hearts1, Hearts1,
-            MagicBarConatinerTop, MagicBarConatinerBottom,
-             action;
-
+            MagicBarConatinerTop, MagicBarConatinerBottom, ItemDrop;
 	},
 	stageLoad: function(){
         	stage.addChild(HeroPlay0, Hearts0, Hearts1, Hearts2,

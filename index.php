@@ -20,14 +20,11 @@ $version = "0.0.1";
 
 <!-- Headers to Game -->
 <script type="text/javascript" src="js/headers.js"></script>
+<script type="text/javascript" src="js/TileSetObjects.js"></script>
+
 
 <!-- Init -->
     <script>
-    // Load Engine
-    zelda.init();
-    
-    // Load Controls
-    zelda.controls();
 
     // Set Placeholders
     zelda.stageSetup();
@@ -42,27 +39,16 @@ $version = "0.0.1";
 // *************** Run Engine
 function init() {
 
-// Find Canvas Tag
-stage = new createjs.Stage( "myCanvas");
-
-// The Tick
-createjs.Ticker.setInterval(11);
-createjs.Ticker.setFPS(11);
-createjs.Ticker.addEventListener("tick", handleTick);
-function handleTick(event) {
-  stage.update();
-}
+// Load Engine & Ticker
+zelda.init();
 
 // *************** Add Objects to Canvas *************************
 zelda.stageHeader();
 zelda.stageLoad();
-// *************** Listen to Human Actions *************************
 
-		// Dependant controls.js
-		 window.addEventListener("keydown", checkKeyDown);
-	  // window.addEventListener("keypress", checkKeyPress);
-		 window.addEventListener("keyup", checkKeyUp);
-		
+// Misc
+zelda.controls();
+
 }
 
     </script>
@@ -70,7 +56,6 @@ zelda.stageLoad();
 	<!-- Character Sprites -->
 	<script type="text/javascript" src="js/characters.js"></script>
 <script>
-
 </script>
 </head>
 <body onload="init()">
@@ -83,6 +68,10 @@ zelda.stageLoad();
 		<br />
 		<!-- <img src="./img/hero_charmap.png"> -->
 	</div>
+	<script>
+
+
+</script>
 </div>
 </body>
 </html>
