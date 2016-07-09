@@ -1,18 +1,18 @@
 <?php
 $name	 = "Canvas Legend of Zelda - A Link to the Past"; 
-$version = "0.0.1";
+$version = "0.0.2";
 # echo "Canvas Mess!";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Canvas Mess <?php echo $version; ?></title>
+<title><?php echo $name, " ", $version; ?></title>
 
 <!-- Game Design Engines -->
    <script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
    <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
 
-<link href="fonts/LinkToPastFont_Snes" rel="stylesheet" type="text/css" />
+<link href="fonts/LinkToPastFont_Snes.ttf" rel="stylesheet" type="text/css" />
 <link href="css/customStyles.css" rel="stylesheet" type="text/css" />
 
 <script src="js/engine.js"></script>
@@ -48,7 +48,6 @@ zelda.stageLoad();
 
 // Misc
 zelda.controls();
-
 }
 
     </script>
