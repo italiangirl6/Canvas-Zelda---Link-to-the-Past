@@ -17,7 +17,7 @@
      				"Hero0WalkIdleRight":		[33],
      				"Hero0IdleShitfacedRight":	[7],
      				"Hero0IdleShitfacedLeft":	[8],
-     				"Hero0FallWhooooooaaaoowh":	[9],
+     				"Hero0FallWhooooooaaaoowh":	[81],
      				"Hero0WalkDown":			[39, 45],
      				"Hero0WalkLeft":			[65, 70],
      				"Hero0WalkUp": 				[26, 29],

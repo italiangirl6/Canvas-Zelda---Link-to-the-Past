@@ -23,8 +23,7 @@ var ItemsPath = "./img/tilesets/Items.png";
      				"BarContainerBottomRight": [146]
      				}
      	});
-     	
-     	
+
     function Load_MagicBarContainer(MoveBarX, MoveBarY){
      	
      	     // Magic Bar
@@ -35,38 +34,38 @@ var ItemsPath = "./img/tilesets/Items.png";
      var MagicBarPositionX = 0;
      
      // Top
-     MagicBarConatinerTopLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerTopLeft");
-     MagicBarConatinerTopLeft.y = (MagicBarConatinerTopLeft.y + MagicBarPositionY) + MagicBarMoveY;
-     MagicBarConatinerTopLeft.x = MagicBarPositionX + MagicBarMoveX;
+     MagicBarContainerTopLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerTopLeft");
+     MagicBarContainerTopLeft.y = (MagicBarContainerTopLeft.y + MagicBarPositionY) + MagicBarMoveY;
+     MagicBarContainerTopLeft.x = MagicBarPositionX + MagicBarMoveX;
      
-     MagicBarConatinerTopRight = new createjs.Sprite(SpriteMagicBar, "BarContainerTopRight");
-     MagicBarConatinerTopRight.y = (MagicBarConatinerTopRight.y + MagicBarPositionY) + MagicBarMoveY;
-     MagicBarConatinerTopRight.x =  (MagicBarConatinerTopLeft.x) + MagicBarRightX;
+     MagicBarContainerTopRight = new createjs.Sprite(SpriteMagicBar, "BarContainerTopRight");
+     MagicBarContainerTopRight.y = (MagicBarContainerTopRight.y + MagicBarPositionY) + MagicBarMoveY;
+     MagicBarContainerTopRight.x =  (MagicBarContainerTopLeft.x) + MagicBarRightX;
       
      
      // Middle 1
-     MagicBarConatinerMiddleLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleLeft");
-     MagicBarConatinerMiddleLeft.y = MagicBarConatinerTopLeft.y + MagicBarPositionY;
-     MagicBarConatinerMiddleLeft.x = MagicBarConatinerTopLeft.x;
-     MagicBarConatinerMiddleRight = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleRight");
-     MagicBarConatinerMiddleRight.y = MagicBarConatinerTopRight.y + MagicBarPositionY;
-     MagicBarConatinerMiddleRight.x = MagicBarConatinerTopRight.x;
+     MagicBarContainerMiddleLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleLeft");
+     MagicBarContainerMiddleLeft.y = MagicBarContainerTopLeft.y + MagicBarPositionY;
+     MagicBarContainerMiddleLeft.x = MagicBarContainerTopLeft.x;
+     MagicBarContainerMiddleRight = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleRight");
+     MagicBarContainerMiddleRight.y = MagicBarContainerTopRight.y + MagicBarPositionY;
+     MagicBarContainerMiddleRight.x = MagicBarContainerTopRight.x;
      
      // Middle 2
-     MagicBarConatinerMiddleLeft0 = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleLeft");
-     MagicBarConatinerMiddleLeft0.y = MagicBarConatinerMiddleLeft.y + MagicBarPositionY;
-     MagicBarConatinerMiddleLeft0.x = MagicBarConatinerTopLeft.x;
-     MagicBarConatinerMiddleRight0 = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleRight");
-     MagicBarConatinerMiddleRight0.y = MagicBarConatinerMiddleRight.y + MagicBarPositionY;
-     MagicBarConatinerMiddleRight0.x = MagicBarConatinerTopRight.x;
+     MagicBarContainerMiddleLeft0 = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleLeft");
+     MagicBarContainerMiddleLeft0.y = MagicBarContainerMiddleLeft.y + MagicBarPositionY;
+     MagicBarContainerMiddleLeft0.x = MagicBarContainerTopLeft.x;
+     MagicBarContainerMiddleRight0 = new createjs.Sprite(SpriteMagicBar, "BarContainerMiddleRight");
+     MagicBarContainerMiddleRight0.y = MagicBarContainerMiddleRight.y + MagicBarPositionY;
+     MagicBarContainerMiddleRight0.x = MagicBarContainerTopRight.x;
      
      // Bottom
-     MagicBarConatinerBottomLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerBottomLeft");
-     MagicBarConatinerBottomLeft.y = MagicBarConatinerMiddleLeft0.y + MagicBarPositionY;
-     MagicBarConatinerBottomLeft.x = MagicBarConatinerTopLeft.x;
-     MagicBarConatinerBottomRight = new createjs.Sprite(SpriteMagicBar, "BarContainerBottomRight");
-     MagicBarConatinerBottomRight.y = MagicBarConatinerMiddleRight0.y + MagicBarPositionY;
-     MagicBarConatinerBottomRight.x = MagicBarConatinerTopRight.x;
+     MagicBarContainerBottomLeft = new createjs.Sprite(SpriteMagicBar, "BarContainerBottomLeft");
+     MagicBarContainerBottomLeft.y = MagicBarContainerMiddleLeft0.y + MagicBarPositionY;
+     MagicBarContainerBottomLeft.x = MagicBarContainerTopLeft.x;
+     MagicBarContainerBottomRight = new createjs.Sprite(SpriteMagicBar, "BarContainerBottomRight");
+     MagicBarContainerBottomRight.y = MagicBarContainerMiddleRight0.y + MagicBarPositionY;
+     MagicBarContainerBottomRight.x = MagicBarContainerTopRight.x;
      	
      	}
 
@@ -134,13 +133,13 @@ var ItemsPath = "./img/tilesets/Items.png";
      		
      		// Top left
      		SelectedItemTopLeftSprite = new createjs.Sprite(HeroSpriteSelectedItemContainer, "SelectedItemContainerTopLeft");
-     SelectedItemTopLeftSprite.y = MagicBarConatinerTopRight.y + 2;
-     SelectedItemTopLeftSprite.x = MagicBarConatinerTopRight.x + 20;
+     SelectedItemTopLeftSprite.y = MagicBarContainerTopRight.y + 2;
+     SelectedItemTopLeftSprite.x = MagicBarContainerTopRight.x + 20;
 
      		// Bottom left
      		SelectedItemBottomLeftSprite = new createjs.Sprite(HeroSpriteSelectedItemContainer, "SelectedItemContainerBottomLeft");
      SelectedItemBottomLeftSprite.y = SelectedItemTopLeftSprite.y + 20;
-     SelectedItemBottomLeftSprite.x = MagicBarConatinerTopRight.x + 20;
+     SelectedItemBottomLeftSprite.x = MagicBarContainerTopRight.x + 20;
      
      		// Top Right
      		SelectedItemTopRightSprite = new createjs.Sprite(HeroSpriteSelectedItemContainer, "SelectedItemContainerTopRight");
@@ -165,17 +164,23 @@ var ItemsPath = "./img/tilesets/Items.png";
      	function LoadHeader_ItemsCounters(){
      		RubyItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconRuby");
      		RubyItemHeaderSprite.y = 2;
-     		RubyItemHeaderSprite.x = MagicBarConatinerTopRight.x + 86;
+     		RubyItemHeaderSprite.scaleX = 2;
+     		RubyItemHeaderSprite.scaleY = 1.3;
+     		RubyItemHeaderSprite.x = MagicBarContainerTopRight.x + 55;
      		RubyItemHeaderSprite.stop();
      		
      		BombItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconBomb");
      		BombItemHeaderSprite.y = 2;
-     		BombItemHeaderSprite.x = RubyItemHeaderSprite.x + 41;
+     		BombItemHeaderSprite.x = RubyItemHeaderSprite.x + 45;
+     		BombItemHeaderSprite.scaleX = 2;
+     		BombItemHeaderSprite.scaleY = 1.3;
      		BombItemHeaderSprite.stop();
      		
      		ArrowItemHeaderSprite = new createjs.Sprite(ZeldaItems, "HeaderIconArrow");
      		ArrowItemHeaderSprite.y = 2;
-     		ArrowItemHeaderSprite.x = BombItemHeaderSprite.x + 38;
+     		ArrowItemHeaderSprite.x = BombItemHeaderSprite.x + 40;
+     		ArrowItemHeaderSprite.scaleX = 2;
+     		ArrowItemHeaderSprite.scaleY = 1.3;
      		ArrowItemHeaderSprite.stop();
      	}
      	

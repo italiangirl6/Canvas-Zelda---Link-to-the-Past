@@ -50,6 +50,12 @@ function checkKeyUp(e){
 				console.log("Up key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleUp");
 		break;
+		case 80: // p
+            console.log("p key was Released");
+            var rand_no = Math.ceil(400*Math.random());
+            var rand_no2 = Math.ceil(400*Math.random());
+            TileObjects.itemDrop("Ruby", rand_no, rand_no2);
+		break;
 	}
 
 	// Dependant on Multiple Keystroke Detection
@@ -97,25 +103,32 @@ function checkKeyDown(e) {
 				console.log("Left key was pressed");
 				// HeroPlay0.gotoAndPlay("Hero0WalkLeft");
 		  		HeroPlay0.x += -charWalkSpeed;
+		  		HeroXCoordinates = HeroPlay0.x;
+		  		HeroYCoordinates = HeroPlay0.y;
 				charAnimation = "Hero0WalkLeft";
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
 				console.log("Right key was pressed");
 		 		 HeroPlay0.x += charWalkSpeed;
+		  		 HeroXCoordinates = HeroPlay0.x;
+		  		 HeroYCoordinates = HeroPlay0.y;
 		 		 charAnimation = "Hero0WalkRight";
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
 			console.log("Down key was pressed");
 			 	HeroPlay0.y += charWalkSpeed;
-			 	//HeroPlay0.y = playerStartY;
+                HeroXCoordinates = HeroPlay0.x;
+                HeroYCoordinates = HeroPlay0.y;
 			 	charAnimation = "Hero0WalkDown";
 		break;
 		
 		case 38: // Up Arrow Key Pressed 
 			console.log("Up key was pressed");
 		 		HeroPlay0.y += -charWalkSpeed;
+		  		HeroXCoordinates = HeroPlay0.x;
+		  		HeroYCoordinates = HeroPlay0.y;
 		 		charAnimation = "Hero0WalkUp";
 		break;
 	}
@@ -163,12 +176,12 @@ function checkKeyPress(e) {
 	
 	switch(e.keyCode){
 		case 87: // W Key Pressed (Woooaaaah!)
-			 	console.log("w key was pressed");
+			 	console.log("w key was Held");
 				HeroPlay0.gotoAndPlay("Hero0FallWhooooooaaaoowh");
 		break;
 
         case 32: // Space Key Pressed
-                console.log("Space key was pressed");
+                console.log("Space key was Held");
                 if(charAnimation == "Hero0WalkIdleDown_Shield"){
                     HeroPlay0.gotoAndPlay("Hero0SwordDown");
                     charAnimation = "Hero0WalkIdleDown_Shield"
@@ -180,25 +193,26 @@ function checkKeyPress(e) {
         break;
 
 		case 37: // Left Arrow Key Pressed
-				console.log("Left key was pressed");
-				HeroPlay0.x += -charWalkSpeed;
-				HeroPlay0.gotoAndPlay("Hero0WalkLeft");
+				console.log("Left key was Held");
+//				HeroPlay0.x += -charWalkSpeed;
+//				HeroPlay0.gotoAndPlay("Hero0WalkLeft");
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
-				console.log("Right key was pressed");
-				 HeroPlay0.gotoAndPlay("Hero0WalkRight");
+				console.log("Right key was Held");
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
-			console.log("Down key was pressed");
-			 	HeroPlay0.gotoAndPlay("Hero0WalkDown");
+			console.log("Down key was Held");
 		break;
 		
 		case 38: // Up Arrow Key Pressed 
-			console.log("Up key was pressed");
-		 		HeroPlay0.gotoAndPlay("Hero0WalkUp");
+			console.log("Up key was Held");
 		break;
+		case 80: // p pressed
+            console.log("p key was Held");
+
+        break;
 	}
 }
 

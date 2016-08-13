@@ -1,6 +1,11 @@
 <?php
+
+include_once "config.php";
+
+?>
+<?php
 $name	 = "Canvas Legend of Zelda - A Link to the Past"; 
-$version = "0.0.2";
+$version = "0.0.3";
 # echo "Canvas Mess!";
 ?>
 <!DOCTYPE html>
@@ -9,7 +14,10 @@ $version = "0.0.2";
 <title><?php echo $name, " ", $version; ?></title>
 
 <!-- Game Design Engines -->
-   <script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
+    // BitmapAnimation is Deprecated !
+    // BitmapAnimation is deprecated in favour of Sprite. See VERSIONS file for info on changes.
+    // For now using 0.7.0
+   <script src="https://code.createjs.com/easeljs-0.7.0.min.js"></script>
    <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
 
 <link href="fonts/LinkToPastFont_Snes.ttf" rel="stylesheet" type="text/css" />
@@ -21,6 +29,7 @@ $version = "0.0.2";
 <!-- Headers to Game -->
 <script type="text/javascript" src="js/headers.js"></script>
 <script type="text/javascript" src="js/TileSetObjects.js"></script>
+<script type="text/javascript" src="js/TileSetLand.js"></script>
 
 
 <!-- Init -->
@@ -28,7 +37,7 @@ $version = "0.0.2";
 
     // Set Placeholders
     zelda.stageSetup();
-        
+
     // For Window events
     var e=window.event || e
 
@@ -44,6 +53,7 @@ zelda.init();
 
 // *************** Add Objects to Canvas *************************
 zelda.stageHeader();
+zelda.stageTilesets();
 zelda.stageLoad();
 
 // Misc
