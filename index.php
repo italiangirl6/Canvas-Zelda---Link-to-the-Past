@@ -1,8 +1,4 @@
-<?php
 
-include_once "config.php";
-
-?>
 <?php
 $name	 = "Canvas Legend of Zelda - A Link to the Past"; 
 $version = "0.0.3";
@@ -14,9 +10,9 @@ $version = "0.0.3";
 <title><?php echo $name, " ", $version; ?></title>
 
 <!-- Game Design Engines -->
-    // BitmapAnimation is Deprecated !
+    <!-- BitmapAnimation is Deprecated !
     // BitmapAnimation is deprecated in favour of Sprite. See VERSIONS file for info on changes.
-    // For now using 0.7.0
+    // For now using 0.7.0 -->
    <script src="https://code.createjs.com/easeljs-0.7.0.min.js"></script>
    <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
 
