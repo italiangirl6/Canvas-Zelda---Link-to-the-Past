@@ -1,6 +1,6 @@
 // Items Tileset location
 var ObjectsPath = "./img/tilesets/Items.png";
-TilesetObjects = new createjs.Bitmap({
+TilesetObjects = new createjs.SpriteSheet({
   "images": [ObjectsPath],
   "frames": {
             "width": 20, "height": 20,
@@ -25,7 +25,6 @@ var TileObjects = {
     zelda.stageUpdate();
 
     // Initiate Collision
-    zelda.collision();
-
+    window.addEventListener("Collide", zelda.collision);
     }
 };

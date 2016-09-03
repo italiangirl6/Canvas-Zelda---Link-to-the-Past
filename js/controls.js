@@ -10,11 +10,14 @@ function checkKeyUp(e){
 
 	switch(e.keyCode){
 		case 37: // Left Arrow Release
-				console.log("Left key was Released");
+//				console.log("Left key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleLeft");
+//                ConsoleLinkPosition();
+//                ConsoleMapPosition();
+
 		break;
 		case 32: // Space Bar Release
-				console.log("Space key was Released");
+//				console.log("Space key was Released");
 
                 matrixStats =  charAnimation;
                 console.log("Log > " + matrixStats);
@@ -39,19 +42,22 @@ function checkKeyUp(e){
 
 		break;
 		case 39: // Right Arrow Release
-				console.log("Right key was Released");
+//				console.log("Right key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleRight");
+//				ConsoleLinkPosition();
 		break;
 		case 40: // Down Arrow Release
-				console.log("Down key was Released");
+//				console.log("Down key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleDown_Shield");
+//				ConsoleLinkPosition();
 		break;
 		case 38: // Up Arrow Release
-				console.log("Up key was Released");
+//				console.log("Up key was Released");
 				HeroPlay0.gotoAndPlay("Hero0WalkIdleUp");
+//				ConsoleLinkPosition();
 		break;
 		case 80: // p
-            console.log("p key was Released");
+//            console.log("p key was Released");
             var rand_no = Math.ceil(400*Math.random());
             var rand_no2 = Math.ceil(400*Math.random());
             TileObjects.itemDrop("Ruby", rand_no, rand_no2);
@@ -61,7 +67,6 @@ function checkKeyUp(e){
 	// Dependant on Multiple Keystroke Detection
 	keys[e.keyCode] = false;
 }
-
 
 // Key Held Down
 function checkKeyDown(e) {
@@ -75,15 +80,19 @@ function checkKeyDown(e) {
 	
 	// Set Default Speed
 	var charWalkSpeed = 5;
+
+	// Set XY Coordinates
+	HeroYCoordinates = HeroPlay0.y;
+	HeroXCoordinates = HeroPlay0.x;
 	
 	switch(e.keyCode){
 		case 87: // W Key Pressed (Woooaaaah!)
-			 	console.log("w key was pressed");
+//			 	console.log("w key was pressed");
 				charAnimation = "Hero0FallWhooooooaaaoowh";
 		break;
 
         case 32: // Space Key Pressed
-                console.log("Space key was pressed");
+//                console.log("Space key was pressed");
                 matrixStats =  charAnimation;
                 console.log("Log > " + matrixStats);
                 if(charAnimation == "Hero0WalkIdleUp"){
@@ -100,66 +109,80 @@ function checkKeyDown(e) {
         break;
 
 		case 37: // Left Arrow Key Pressed
-				console.log("Left key was pressed");
+//				console.log("Left key was pressed");
 				// HeroPlay0.gotoAndPlay("Hero0WalkLeft");
-		  		HeroPlay0.x += -charWalkSpeed;
-		  		HeroXCoordinates = HeroPlay0.x;
-		  		HeroYCoordinates = HeroPlay0.y;
+                if(HeroXCoordinates == (-80) || HeroXCoordinates < (-80)){} else {
+		 		HeroXCoordinates = HeroPlay0.x += -charWalkSpeed;
+
+                }
 				charAnimation = "Hero0WalkLeft";
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
-				console.log("Right key was pressed");
-		 		 HeroPlay0.x += charWalkSpeed;
-		  		 HeroXCoordinates = HeroPlay0.x;
-		  		 HeroYCoordinates = HeroPlay0.y;
+//				console.log("Right key was pressed");
+//		  		 console.log("Hero X: "+ HeroXCoordinates);
+                 if(HeroXCoordinates == 430 || HeroXCoordinates > 430 ){} else {
+		  		 HeroXCoordinates = HeroPlay0.x += charWalkSpeed;
+                 }
 		 		 charAnimation = "Hero0WalkRight";
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
-			console.log("Down key was pressed");
-			 	HeroPlay0.y += charWalkSpeed;
-                HeroXCoordinates = HeroPlay0.x;
-                HeroYCoordinates = HeroPlay0.y;
-			 	charAnimation = "Hero0WalkDown";
+//			console.log("Down key was pressed");
+                 HeroYCoordinates = HeroPlay0.y;
+                 if(HeroYCoordinates == 300){} else {
+		  		 HeroYCoordinates = HeroPlay0.y += charWalkSpeed;
+                 }
+//		  		 console.log("Hero y: "+ HeroYCoordinates);
+                charAnimation = "Hero0WalkDown";
 		break;
 		
 		case 38: // Up Arrow Key Pressed 
-			console.log("Up key was pressed");
-		 		HeroPlay0.y += -charWalkSpeed;
-		  		HeroXCoordinates = HeroPlay0.x;
-		  		HeroYCoordinates = HeroPlay0.y;
+//			console.log("Up key was pressed");
+                HeroYCoordinates = HeroPlay0.y;
+                if(HeroYCoordinates == -65){} else {
+		 		HeroYCoordinates = HeroPlay0.y += -charWalkSpeed;
+                }
 		 		charAnimation = "Hero0WalkUp";
 		break;
 	}
+	// Handling Multiple Keys
 			// Diagnal Down Right
 			if(keys[40] && keys[39]){
 				console.log("Down & Right key was pressed");
-			 	HeroPlay0.y += charWalkSpeed;
-			 	HeroPlay0.x += charWalkSpeed;
+                if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
+                HeroPlay0.y += charWalkSpeed;
+                HeroPlay0.x += charWalkSpeed;
+                }
 			 	charAnimation = "Hero0WalkDown";
 			}
 			
 			// Diagnal Down left
 			if(keys[40] && keys[37]){
 				console.log("Down & Left key was pressed");
-			 	HeroPlay0.y += (charWalkSpeed - 1);
-			 	HeroPlay0.x += (-charWalkSpeed - 1);
+                if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
+                HeroPlay0.y += (charWalkSpeed - 1);
+                HeroPlay0.x += (-charWalkSpeed - 1);
+                }
 			 	charAnimation = "Hero0WalkDown";
 			}
 			
 			// Diagnal up Right
 			if(keys[38] && keys[39]){
 				console.log("Up & Right key was pressed");
+                if(HeroXCoordinates == 430 || HeroXCoordinates > 430 || HeroYCoordinates == -65 || HeroYCoordinates < -65){} else {
 			 	HeroPlay0.y += -charWalkSpeed;
 			 	HeroPlay0.x += charWalkSpeed;
+                }
 			 	charAnimation = "Hero0WalkUp";
 			}
 			// Diagnal up Left
 			if(keys[38] && keys[37]){
 				console.log("Up & Left key was pressed");
-			 	HeroPlay0.y += -charWalkSpeed;
-			 	HeroPlay0.x += -charWalkSpeed;
+                if(HeroXCoordinates == 430 || HeroYCoordinates == -65){} else {
+                HeroPlay0.y += -charWalkSpeed;
+                HeroPlay0.x += -charWalkSpeed;
+                }
 			 	charAnimation = "Hero0WalkUp";
 			}
 			
@@ -176,12 +199,12 @@ function checkKeyPress(e) {
 	
 	switch(e.keyCode){
 		case 87: // W Key Pressed (Woooaaaah!)
-			 	console.log("w key was Held");
+//			 	console.log("w key was Held");
 				HeroPlay0.gotoAndPlay("Hero0FallWhooooooaaaoowh");
 		break;
 
         case 32: // Space Key Pressed
-                console.log("Space key was Held");
+//                console.log("Space key was Held");
                 if(charAnimation == "Hero0WalkIdleDown_Shield"){
                     HeroPlay0.gotoAndPlay("Hero0SwordDown");
                     charAnimation = "Hero0WalkIdleDown_Shield"
@@ -193,25 +216,24 @@ function checkKeyPress(e) {
         break;
 
 		case 37: // Left Arrow Key Pressed
-				console.log("Left key was Held");
+//				console.log("Left key was Held");
 //				HeroPlay0.x += -charWalkSpeed;
 //				HeroPlay0.gotoAndPlay("Hero0WalkLeft");
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
-				console.log("Right key was Held");
+//				console.log("Right key was Held");
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
-			console.log("Down key was Held");
+//			console.log("Down key was Held");
 		break;
 		
 		case 38: // Up Arrow Key Pressed 
-			console.log("Up key was Held");
+//			console.log("Up key was Held");
 		break;
 		case 80: // p pressed
-            console.log("p key was Held");
-
+//            console.log("p key was Held");
         break;
 	}
 }
