@@ -1,7 +1,7 @@
      var HeroSpritePath = "./img/link_charmap.png";
      Hero0Sprite = new createjs.SpriteSheet({
      "images": [HeroSpritePath],
-     "frames": {"regX": playerStartX, "regY": playerStartY, 
+     "frames": {"regX": playerStartX, "regY": playerStartY,
      			"width": 80, "height": 90,
      			   },
      			//

@@ -58,9 +58,16 @@ function checkKeyUp(e){
 		break;
 		case 80: // p
 //            console.log("p key was Released");
-            var rand_no = Math.ceil(400*Math.random());
-            var rand_no2 = Math.ceil(400*Math.random());
-            TileObjects.itemDrop("Ruby", rand_no, rand_no2);
+            rand_no = Math.ceil(400*Math.random());
+            rand_no2 = Math.ceil(400*Math.random());
+
+            var randomDump = ["Bomb0", "Ruby50", "Ruby100", "Ruby300"];
+            var randSelect = randomDump[Math.floor(Math.random() * randomDump.length)];
+
+            TileObjects.itemDrop(randSelect, rand_no, rand_no2);
+		break;
+		case 90: // z
+		    zeldaDebugger.ConsoleLinkPosition();
 		break;
 	}
 

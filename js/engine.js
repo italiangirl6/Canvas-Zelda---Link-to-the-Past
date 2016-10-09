@@ -12,7 +12,14 @@ var zelda = {
 		createjs.Ticker.setFPS(11);
 		createjs.Ticker.addEventListener("tick", handleTick);
 		function handleTick(event) {
- 		    zelda.stageUpdate();
+            // Actions carried out each tick (aka frame)
+            zelda.stageUpdate();
+            // Initiate Collision
+            window.addEventListener("Collide", zelda.collision());
+
+             if (!event.paused) {
+                 // Actions carried out when the Ticker is not paused.
+             }
 		}
 	},
     stageUpdate: function(){
@@ -35,6 +42,10 @@ var zelda = {
 
     // Link
     var HeroXCoordinates, HeroYCoordinates;
+
+    // Collision
+    var collisionTest;
+    var collisionTestX, collisionTestY;
 	},
 	stageLoad: function(){
         	stage.addChild(HeroPlay0, Hearts0, Hearts1, Hearts2,
@@ -49,6 +60,14 @@ var zelda = {
 
         	 LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
         	 RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite);
+
+        	 // Header Counts
+        	 var rubyCount, bombCount;
+
+
+        	 // Positioning (Currently drop Item only
+        	 var rand_no, rand_no2;
+
 	},
 	stageHeader: function(){
 	     // Styling
@@ -63,13 +82,13 @@ var zelda = {
     	 LifeHeaderText.y = 9;
 
          // Header Rubies Text
-         var rubyCount = 666;
+          rubyCount = 869;
          RubyCountText = new createjs.Text(rubyCount, fontSize + "px " + fontType, fontColor);
          RubyCountText.x = 116;
          RubyCountText.y = 29;
 
          // Header Bombs Text
-         var bombCount = 10;
+         bombCount = 10;
          BombCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
          BombCountText.x = RubyCountText.x + 46;
          BombCountText.y = RubyCountText.y;
@@ -101,14 +120,78 @@ var zelda = {
 
 	},
 	collision: function(collisionEvent){
+//	console.log("Scanning for Collision. . ." + DropSpecificItem);
+
+
+
 	     // Drop Objects
-	     if (typeof DropSpecificItem === 'undefined' || DropSpecificItem === null) {
+	     var acceptibleRadius = 6;
+	     switch(collisionTest){
+	        case "Ruby50":
+	        case "Ruby100":
+	        case "Ruby300":
+                console.log("Collision Event Success");
+                    if(HeroPlay0.x.between((rand_no - acceptibleRadius), rand_no) || HeroPlay0.x.between((rand_no + acceptibleRadius), rand_no) &&
+                     HeroPlay0.y.between((rand_no2 - acceptibleRadius), rand_no2) || HeroPlay0.y.between((rand_no2 + acceptibleRadius), rand_no2)){
+                        console.log("SCORE!");
+                      stage.removeChild(DropSpecificItem);
+
+                        // Update Rupee Wallet -
+                        // This handles 50, 100, 300
+                        if(collisionTest == "Ruby50") {
+                        rubyCount = rubyCount + 50;
+                        } else if(collisionTest == "Ruby100"){
+                        rubyCount = rubyCount + 100;
+                        } else if(collisionTest == "Ruby300"){
+                        rubyCount = rubyCount + 300;
+                        }
+
+                        if(rubyCount >= 999){
+                        rubyCount = 999;
+                        RubyCountText.text = rubyCount;
+                        zelda.stageUpdate();
+                        } else {
+                        RubyCountText.text = rubyCount;
+                        zelda.stageUpdate();
+                        }
+
+                    }
+	        break;
+	        case "Bomb0":
+                console.log("Collision Event Success");
+                if(HeroPlay0.x.between((rand_no - acceptibleRadius), rand_no) || HeroPlay0.x.between((rand_no + acceptibleRadius), rand_no) &&
+                HeroPlay0.y.between((rand_no2 - acceptibleRadius), rand_no2) || HeroPlay0.y.between((rand_no2 + acceptibleRadius), rand_no2)){
+                console.log("SCORE!");
+                stage.removeChild(DropSpecificItem);
+
+                // Update Bomb Wallet -
+                // This handles 1
+                if(collisionTest == "Bomb0") {
+                bombCount = bombCount + 1;
+                    if(bombCount >= 20){
+                    bombCount = 20;
+                    BombCountText.text = bombCount;
+                    zelda.stageUpdate();
+                    } else {
+                    BombCountText.text = bombCount;
+                    zelda.stageUpdate();
+                    }
+                }
+	        break;
+
+
+	     }
+	     }
+	     if (typeof collisionTest === 'undefined' || DropSpecificItem === null) {
+
              // variable is undefined
-             console.log("DropSpecificItem not found");
-         } else {
-            console.log("Collision Event" + collisionEvent);
+//             console.log("DropSpecificItem not found");
+         } else if(collisionTest == "Ruby50"){
+
+
 
          }
+
 	},
     stageTilesets: function(){
         console.log("Setting up Stage");
@@ -276,7 +359,20 @@ function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
 }
 
 // CONSOLE STATS
+var zeldaDebugger = {
 
+    // Link
+    ConsoleLinkPosition: function(){
+    console.log("Char X: " + HeroXCoordinates + "\n" +
+        "Char Y: " + HeroYCoordinates);
+
+    },
+    // Capture the XY Path of DropSpecificItem
+    ConsoleDropSpecificItem: function(){
+    console.log("DroppedItem Y: " + DropSpecificItem + "\n" +
+                "Char X: " + DropSpecificItem);
+    }
+}
     // Map
 function ConsoleMapPosition(){
 console.log("Map Width: " + mapWidth + "\n" +
@@ -288,3 +384,7 @@ console.log("Char Y: " + HeroYCoordinates + "\n" +
             "Char X: " + HeroXCoordinates);
 }
 
+// Find the range between two numbers
+Number.prototype.between = function(first,last){
+    return (first < last ? this >= first && this <= last : this >= last && this <= first);
+}

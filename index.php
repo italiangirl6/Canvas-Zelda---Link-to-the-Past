@@ -38,8 +38,9 @@ $version = "0.0.3";
     var e=window.event || e
 
     // Main Character's Default Location
-    var playerStartY = -136;
-    var playerStartX = -63;
+
+      var playerStartY = 2;
+      var playerStartX = 2;
 
 // *************** Run Engine
 function init() {
