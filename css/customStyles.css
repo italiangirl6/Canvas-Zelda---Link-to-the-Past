@@ -19,6 +19,16 @@ canvas {
     margin: auto;
     width: 694px;
 }
+
 .GameVersionNumber {
+    float: right;
     text-align: right;
+}
+
+
+.subButtons {
+    border-radius: 12px;
+    float: left;
+    margin: 0 auto;
+    padding: 2px;
 }

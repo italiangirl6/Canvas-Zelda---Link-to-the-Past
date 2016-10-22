@@ -101,7 +101,7 @@ function checkKeyDown(e) {
         case 32: // Space Key Pressed
 //                console.log("Space key was pressed");
                 matrixStats =  charAnimation;
-                console.log("Log > " + matrixStats);
+//                console.log("Log > " + matrixStats);
                 if(charAnimation == "Hero0WalkIdleUp"){
                     charAnimation = "Hero0SwordUp";
                 } else if(charAnimation == "Hero0WalkIdleDown_Shield"){
@@ -118,28 +118,21 @@ function checkKeyDown(e) {
 		case 37: // Left Arrow Key Pressed
 //				console.log("Left key was pressed");
 				// HeroPlay0.gotoAndPlay("Hero0WalkLeft");
-                if(HeroXCoordinates == (-80) || HeroXCoordinates < (-80)){} else {
 		 		HeroXCoordinates = HeroPlay0.x += -charWalkSpeed;
-
-                }
 				charAnimation = "Hero0WalkLeft";
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
 //				console.log("Right key was pressed");
 //		  		 console.log("Hero X: "+ HeroXCoordinates);
-                 if(HeroXCoordinates == 430 || HeroXCoordinates > 430 ){} else {
 		  		 HeroXCoordinates = HeroPlay0.x += charWalkSpeed;
-                 }
 		 		 charAnimation = "Hero0WalkRight";
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
 //			console.log("Down key was pressed");
                  HeroYCoordinates = HeroPlay0.y;
-                 if(HeroYCoordinates == 300){} else {
 		  		 HeroYCoordinates = HeroPlay0.y += charWalkSpeed;
-                 }
 //		  		 console.log("Hero y: "+ HeroYCoordinates);
                 charAnimation = "Hero0WalkDown";
 		break;
@@ -147,16 +140,14 @@ function checkKeyDown(e) {
 		case 38: // Up Arrow Key Pressed 
 //			console.log("Up key was pressed");
                 HeroYCoordinates = HeroPlay0.y;
-                if(HeroYCoordinates == -65){} else {
 		 		HeroYCoordinates = HeroPlay0.y += -charWalkSpeed;
-                }
 		 		charAnimation = "Hero0WalkUp";
 		break;
 	}
 	// Handling Multiple Keys
 			// Diagnal Down Right
 			if(keys[40] && keys[39]){
-				console.log("Down & Right key was pressed");
+//				console.log("Down & Right key was pressed");
                 if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
                 HeroPlay0.y += charWalkSpeed;
                 HeroPlay0.x += charWalkSpeed;
@@ -166,7 +157,7 @@ function checkKeyDown(e) {
 			
 			// Diagnal Down left
 			if(keys[40] && keys[37]){
-				console.log("Down & Left key was pressed");
+//				console.log("Down & Left key was pressed");
                 if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
                 HeroPlay0.y += (charWalkSpeed - 1);
                 HeroPlay0.x += (-charWalkSpeed - 1);
@@ -176,7 +167,7 @@ function checkKeyDown(e) {
 			
 			// Diagnal up Right
 			if(keys[38] && keys[39]){
-				console.log("Up & Right key was pressed");
+//				console.log("Up & Right key was pressed");
                 if(HeroXCoordinates == 430 || HeroXCoordinates > 430 || HeroYCoordinates == -65 || HeroYCoordinates < -65){} else {
 			 	HeroPlay0.y += -charWalkSpeed;
 			 	HeroPlay0.x += charWalkSpeed;
@@ -185,7 +176,7 @@ function checkKeyDown(e) {
 			}
 			// Diagnal up Left
 			if(keys[38] && keys[37]){
-				console.log("Up & Left key was pressed");
+//				console.log("Up & Left key was pressed");
                 if(HeroXCoordinates == 430 || HeroYCoordinates == -65){} else {
                 HeroPlay0.y += -charWalkSpeed;
                 HeroPlay0.x += -charWalkSpeed;

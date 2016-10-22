@@ -14,8 +14,19 @@ var zelda = {
 		function handleTick(event) {
             // Actions carried out each tick (aka frame)
             zelda.stageUpdate();
+
             // Initiate Collision
             window.addEventListener("Collide", zelda.collision());
+
+            // Check Debug Mode
+            if(typeof debugModOn == 'undefined'){
+            debugModOn = false;
+            addedDebugObjects = false;
+            }
+            if(debugModOn){
+                zeldaDebugger.HighlightObject();
+            } else  {
+            }
 
              if (!event.paused) {
                  // Actions carried out when the Ticker is not paused.
@@ -33,7 +44,7 @@ var zelda = {
 	},
 	stageSetup: function(){
 	// Setup Variables
-    var stage, TileSets, HeroPlay0, Hearts0, Hearts1, Hearts1,
+    var stage, TileSets, Hearts0, Hearts1, Hearts1,
     MagicBarContainerTop, MagicBarContainerBottom;
 
     // TileSets
@@ -41,14 +52,17 @@ var zelda = {
         tiles, cellBitmap;
 
     // Link
-    var HeroXCoordinates, HeroYCoordinates;
+    var HeroPlay0, HeroXCoordinates, HeroYCoordinates;
 
     // Collision
     var collisionTest;
     var collisionTestX, collisionTestY;
+
+    // Debug
+    var debugModOn, addedDebugObjects = false;
 	},
 	stageLoad: function(){
-        	stage.addChild(HeroPlay0, Hearts0, Hearts1, Hearts2,
+        	stage.addChild(Hearts0, Hearts1, Hearts2,
         	 MagicBarContainerTopLeft, MagicBarContainerTopRight,
         	 MagicBarContainerMiddleLeft, MagicBarContainerMiddleRight,
         	 MagicBarContainerMiddleLeft0, MagicBarContainerMiddleRight0,
@@ -64,10 +78,15 @@ var zelda = {
         	 // Header Counts
         	 var rubyCount, bombCount;
 
-
         	 // Positioning (Currently drop Item only
         	 var rand_no, rand_no2;
 
+	},
+	characterLoad: function(){
+        HeroPlay0.x = HeroXCoordinates;
+        HeroPlay0.y = HeroYCoordinates;
+
+        stage.addChild(HeroPlay0);
 	},
 	stageHeader: function(){
 	     // Styling
@@ -122,15 +141,14 @@ var zelda = {
 	collision: function(collisionEvent){
 //	console.log("Scanning for Collision. . ." + DropSpecificItem);
 
-
-
 	     // Drop Objects
 	     var acceptibleRadius = 6;
-	     switch(collisionTest){
+	     if (typeof collisionTest === 'undefined' || DropSpecificItem === null) {
+         } else {
+	        switch(collisionTest){
 	        case "Ruby50":
 	        case "Ruby100":
 	        case "Ruby300":
-                console.log("Collision Event Success");
                     if(HeroPlay0.x.between((rand_no - acceptibleRadius), rand_no) || HeroPlay0.x.between((rand_no + acceptibleRadius), rand_no) &&
                      HeroPlay0.y.between((rand_no2 - acceptibleRadius), rand_no2) || HeroPlay0.y.between((rand_no2 + acceptibleRadius), rand_no2)){
                         console.log("SCORE!");
@@ -182,16 +200,7 @@ var zelda = {
 
 	     }
 	     }
-	     if (typeof collisionTest === 'undefined' || DropSpecificItem === null) {
-
-             // variable is undefined
-//             console.log("DropSpecificItem not found");
-         } else if(collisionTest == "Ruby50"){
-
-
-
          }
-
 	},
     stageTilesets: function(){
         console.log("Setting up Stage");
@@ -322,6 +331,7 @@ var zelda = {
       }
 
 };
+
 // layer initialization
 function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
     for ( var y = 0; y < layerData.height; y++) {
@@ -356,32 +366,6 @@ function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
             stage.addChild(cellBitmap);
         }
     }
-}
-
-// CONSOLE STATS
-var zeldaDebugger = {
-
-    // Link
-    ConsoleLinkPosition: function(){
-    console.log("Char X: " + HeroXCoordinates + "\n" +
-        "Char Y: " + HeroYCoordinates);
-
-    },
-    // Capture the XY Path of DropSpecificItem
-    ConsoleDropSpecificItem: function(){
-    console.log("DroppedItem Y: " + DropSpecificItem + "\n" +
-                "Char X: " + DropSpecificItem);
-    }
-}
-    // Map
-function ConsoleMapPosition(){
-console.log("Map Width: " + mapWidth + "\n" +
-            "Map Height: " + mapHeight);
-}
-    // Link
-function ConsoleLinkPosition(){
-console.log("Char Y: " + HeroYCoordinates + "\n" +
-            "Char X: " + HeroXCoordinates);
 }
 
 // Find the range between two numbers

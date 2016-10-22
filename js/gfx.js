@@ -3,7 +3,9 @@
      
      // engine.js & characters.js - How Main Character is Printed & Walks
      HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
- 
+     HeroPlay0.x = HeroYCoordinates;
+     HeroPlay0.y = HeroYCoordinates;
+
      // headers.js - Hearts Section
      Hearts0 = new createjs.Sprite(HeroSpriteHearts0, "HeartFull");
      Hearts1 = new createjs.Sprite(HeroSpriteHearts1, "HeartHalf");
