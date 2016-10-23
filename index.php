@@ -51,7 +51,9 @@ zelda.init();
 // *************** Add Objects to Canvas *************************
 zelda.stageHeader();
 zelda.stageTilesets();
-zelda.stageLoad();
+zelda.stageLoad("add", "magickBar");
+zelda.stageLoad("add", "selectedItemBar");
+zelda.stageLoad("add", "rupeeBombArrowBar");
 zelda.characterLoad();
 
 // Misc

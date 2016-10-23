@@ -1,7 +1,7 @@
 
 var zelda = {
 
-// *************** Run Engine
+    // *************** Run Engine
 	init: function() {
 
 		// Find Canvas Tag
@@ -33,19 +33,32 @@ var zelda = {
              }
 		}
 	},
+
     stageUpdate: function(){
+//        console.log("Updating Stage");
         stage.update();
     },
+
+    // Adds event listeners for keyboard strokes
 	controls: function() {
 	// Dependant controls.js
 	window.addEventListener("keydown", checkKeyDown);
 	window.addEventListener("keypress", checkKeyPress);
 	window.addEventListener("keyup", checkKeyUp);
 	},
+
+    // Set proper variables for stage to load
 	stageSetup: function(){
+
 	// Setup Variables
-    var stage, TileSets, Hearts0, Hearts1, Hearts1,
-    MagicBarContainerTop, MagicBarContainerBottom;
+    var stage, TileSets;
+
+     // Header
+     var rubyCount, bombCount, Hearts0, Hearts1, Hearts1;
+     var MagicBarContainerTop, MagicBarContainerBottom;
+
+     // Positioning (Currently drop Item only)
+     var rand_no, rand_no2;
 
     // TileSets
     var tile, map1, mapTiles, game, mapWidth, mapHeight, tileSheet,
@@ -55,39 +68,56 @@ var zelda = {
     var HeroPlay0, HeroXCoordinates, HeroYCoordinates;
 
     // Collision
-    var collisionTest;
-    var collisionTestX, collisionTestY;
+    var collisionTest, collisionTestX, collisionTestY;
 
     // Debug
     var debugModOn, addedDebugObjects = false;
 	},
-	stageLoad: function(){
-        	stage.addChild(Hearts0, Hearts1, Hearts2,
-        	 MagicBarContainerTopLeft, MagicBarContainerTopRight,
-        	 MagicBarContainerMiddleLeft, MagicBarContainerMiddleRight,
-        	 MagicBarContainerMiddleLeft0, MagicBarContainerMiddleRight0,
-        	 MagicBarContainerBottomLeft, MagicBarContainerBottomRight,
 
-        	 SelectedItemTopLeftSprite, SelectedItemTopRightSprite,
-        	 SelectedItemBottomLeftSprite, SelectedItemBottomRightSprite,
-        	 SelectedItem,
+    // Add or Remove Elements from Stage
+	stageLoad: function(ObjectEvent, ObjectName){
+        var objectValue;
+	    switch(ObjectName){
+	        case "magickBar":
+	            objectValue = mainVars.magickBar();
+	        break;
+	        case "selectedItemBar":
+	            objectValue = mainVars.selectedItemBar();
+            break;
+            case "rupeeBombArrowBar":
+                objectValue = mainVars.rupeeBombArrowBar();
+            break;
+	    }
 
-        	 LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
-        	 RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite);
+	    if(ObjectEvent == "add"){
 
-        	 // Header Counts
-        	 var rubyCount, bombCount;
+            // Loop through Switch Array and add
+            for(i = 0; i < objectValue.length; i++){
+                stage.addChild(objectValue[i]);
+            }
+        	stage.addChild(Hearts0, Hearts1, Hearts2);
 
-        	 // Positioning (Currently drop Item only
-        	 var rand_no, rand_no2;
+	    } else if(ObjectEvent == "remove") {
+
+	        // Loop through Switch Array and add
+            for(i = 0; i < objectValue.length; i++){
+                stage.removeChild(objectValue[i]);
+            }
+	        stage.removeChild();
+
+	    } else {
+	        console.log("Unhandled Event");
+	    }
 
 	},
+
 	characterLoad: function(){
         HeroPlay0.x = HeroXCoordinates;
         HeroPlay0.y = HeroYCoordinates;
 
         stage.addChild(HeroPlay0);
 	},
+
 	stageHeader: function(){
 	     // Styling
 	     var fontType   = "Return of Ganon";
@@ -138,6 +168,7 @@ var zelda = {
          // TEMP
 
 	},
+
 	collision: function(collisionEvent){
 //	console.log("Scanning for Collision. . ." + DropSpecificItem);
 
@@ -202,8 +233,9 @@ var zelda = {
 	     }
          }
 	},
+
     stageTilesets: function(){
-        console.log("Setting up Stage");
+//        console.log("Loading Stage Tiles");
 
         var ObjectsPath = "./img/tilesets/MISC.png";
         var mapData = {"height":18,
@@ -329,7 +361,24 @@ var zelda = {
 
 
       }
+};
 
+var mainVars = {
+    magickBar: function(){
+        return [MagicBarContainerTopLeft, MagicBarContainerTopRight,
+                                MagicBarContainerMiddleLeft, MagicBarContainerMiddleRight,
+                                MagicBarContainerMiddleLeft0, MagicBarContainerMiddleRight0,
+                                MagicBarContainerBottomLeft, MagicBarContainerBottomRight];
+    },
+    selectedItemBar: function(){
+        return [SelectedItemTopLeftSprite, SelectedItemTopRightSprite,
+                                SelectedItemBottomLeftSprite, SelectedItemBottomRightSprite,
+                                SelectedItem];
+    },
+    rupeeBombArrowBar: function(){
+        return [LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
+                                RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite];
+    }
 };
 
 // layer initialization
@@ -368,7 +417,7 @@ function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
     }
 }
 
-// Find the range between two numbers
+// Find the range between two numbers - taken from stackoverflow (can't remember where)
 Number.prototype.between = function(first,last){
     return (first < last ? this >= first && this <= last : this >= last && this <= first);
 }
