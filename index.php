@@ -2,6 +2,7 @@
 $name	 = "Canvas Legend of Zelda - A Link to the Past"; 
 $version = "0.0.3";
 # echo "Canvas Mess!";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,14 +19,15 @@ $version = "0.0.3";
 <link href="fonts/LinkToPastFont_Snes.ttf" rel="stylesheet" type="text/css" />
 <link href="css/customStyles.css" rel="stylesheet" type="text/css" />
 
-<script src="js/engine.js"></script>
-<script src="js/controls.js"></script>
-
 <!-- Headers to Game -->
 <script type="text/javascript" src="js/headers.js"></script>
 <script type="text/javascript" src="js/TileSetObjects.js"></script>
 <script type="text/javascript" src="js/debugger.js"></script>
 <script type="text/javascript" src="js/TileSetLand.js"></script>
+
+<script src="js/engine.js"></script>
+<script src="js/controls.js"></script>
+
 
 
 <!-- Init -->
@@ -49,11 +51,9 @@ function init() {
 zelda.init();
 
 // *************** Add Objects to Canvas *************************
-zelda.stageHeader();
 zelda.stageTilesets();
-zelda.stageLoad("add", "magickBar");
-zelda.stageLoad("add", "selectedItemBar");
-zelda.stageLoad("add", "rupeeBombArrowBar");
+zelda.stageHeader();
+
 zelda.characterLoad();
 
 // Misc
@@ -71,7 +71,9 @@ zelda.controls();
 		<div class="GameTitle"><?php echo $name; ?></div>
         <canvas id="myCanvas" width="578" height="550"></canvas>
         <div id="subConsole">
-            <button id="debugButton" class="subButtons" onclick="zeldaDebugger.DebugOn()">Debug</button>
+            <button id="debugButton" class="subButtons on" onclick="zeldaDebugger.DebugOn()">Debug</button>
+            <button id="removeDebugButton" class="subButtons off" onclick="zeldaDebugger.DebuggerOff()">End Debug</button>
+            <button class="subButtons" onclick="zelda.printControls()">Controls</button>
             <div class="GameVersionNumber"><?php echo $version; ?></div>
             <br />
         </div>

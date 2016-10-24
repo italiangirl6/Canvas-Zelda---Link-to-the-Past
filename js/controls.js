@@ -65,6 +65,7 @@ function checkKeyUp(e){
             var randSelect = randomDump[Math.floor(Math.random() * randomDump.length)];
 
             TileObjects.itemDrop(randSelect, rand_no, rand_no2);
+//            zelda.stageLoad("remove", "selectedItemBar");
 		break;
 		case 90: // z
 		    zeldaDebugger.ConsoleLinkPosition();

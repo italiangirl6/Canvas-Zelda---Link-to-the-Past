@@ -25,7 +25,6 @@ var zeldaDebugger = {
         } else {}
         var shiftCircleXY = 42.6;
         circle.graphics.beginStroke("#FFF").drawCircle(0, 0, 30);
-        document.getElementById("debugButton").onclick = zeldaDebugger.DebuggerOff;
 
         //Set position of Shape instance.
         circle.x = HeroXCoordinates + shiftCircleXY;
@@ -76,12 +75,16 @@ var zeldaDebugger = {
     },
 
     DebugOn: function(){
+        document.getElementById("removeDebugButton").setAttribute("class", "subButtons on");
+         document.getElementById("debugButton").setAttribute("class", "subButtons off");
         debugModOn = true;
         addedDebugObjects = false;
     },
 
     DebuggerOff: function(){
-     zeldaDebugger.RemoveHighlight;
+     document.getElementById("removeDebugButton").setAttribute("class", "subButtons off");
+     document.getElementById("debugButton").setAttribute("class", "subButtons on");
+     stage.removeChild(circle, xCoord, yCoord);
      debugModOn = false;
     }
 

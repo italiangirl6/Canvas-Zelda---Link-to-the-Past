@@ -99,15 +99,23 @@ var zelda = {
 
 	    } else if(ObjectEvent == "remove") {
 
-	        // Loop through Switch Array and add
-            for(i = 0; i < objectValue.length; i++){
-                stage.removeChild(objectValue[i]);
+            // Some objects are more than one and require array
+            // Others do not if not array just remove if array
+            // loop and remove all
+            if(Array.isArray(objectValue)){
+                // Loop through Switch Array and add
+                for(i = 0; i <= objectValue.length; i++){
+                    console.log(i + ") removing: " + objectValue[i]);
+                    stage.removeChild(objectValue[i]);
+                }
+            } else {
+                stage.removeChild(objectValue);
             }
-	        stage.removeChild();
 
 	    } else {
 	        console.log("Unhandled Event");
 	    }
+	    zelda.stageUpdate();
 
 	},
 
@@ -131,31 +139,31 @@ var zelda = {
     	 LifeHeaderText.y = 9;
 
          // Header Rubies Text
-          rubyCount = 869;
+          rubyCount = 000;
          RubyCountText = new createjs.Text(rubyCount, fontSize + "px " + fontType, fontColor);
          RubyCountText.x = 116;
          RubyCountText.y = 29;
 
          // Header Bombs Text
-         bombCount = 10;
+         bombCount = 00;
          BombCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
          BombCountText.x = RubyCountText.x + 46;
          BombCountText.y = RubyCountText.y;
 
          // Header Arrows Text
-         var ArrowCount = 69;
+         var ArrowCount = 00;
          ArrowCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
          ArrowCountText.x = BombCountText.x + 38;
          ArrowCountText.y = RubyCountText.y;
 
          // Load Magic Bar Container:
-         Load_MagicBarContainer(0, 0);
+         headLoader.Load_MagicBarContainer(0, 0);
 
          // Load Item Selected Container
-         LoadHeader_ItemContainer();
+         headLoader.LoadHeader_ItemContainer();
 
          // Load Item Header Icons
-         LoadHeader_ItemsCounters();
+         headLoader.LoadHeader_ItemsCounters();
 
          // engine.js & characters.js - How Main Character is Printed & Walks
          HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
@@ -173,7 +181,8 @@ var zelda = {
 //	console.log("Scanning for Collision. . ." + DropSpecificItem);
 
 	     // Drop Objects
-	     var acceptibleRadius = 6;
+	     var acceptibleRadius = 9;
+	     var objectCountUpdated = false;
 	     if (typeof collisionTest === 'undefined' || DropSpecificItem === null) {
          } else {
 	        switch(collisionTest){
@@ -182,54 +191,78 @@ var zelda = {
 	        case "Ruby300":
                     if(HeroPlay0.x.between((rand_no - acceptibleRadius), rand_no) || HeroPlay0.x.between((rand_no + acceptibleRadius), rand_no) &&
                      HeroPlay0.y.between((rand_no2 - acceptibleRadius), rand_no2) || HeroPlay0.y.between((rand_no2 + acceptibleRadius), rand_no2)){
-                        console.log("SCORE!");
+
+                      // Remove item
+                      // If character holds still, item will continue to add
+                      // Change Drop Object Coordinates to prevent this
                       stage.removeChild(DropSpecificItem);
+                      rand_no, rand_no2 = 0;
 
                         // Update Rupee Wallet -
                         // This handles 50, 100, 300
-                        if(collisionTest == "Ruby50") {
-                        rubyCount = rubyCount + 50;
-                        } else if(collisionTest == "Ruby100"){
-                        rubyCount = rubyCount + 100;
-                        } else if(collisionTest == "Ruby300"){
-                        rubyCount = rubyCount + 300;
-                        }
+                        if(!objectCountUpdated){
+                            if(collisionTest == "Ruby50") {
+                            rubyCount += 50;
+                            } else if(collisionTest == "Ruby100"){
+                            rubyCount += 100;
+                            } else if(collisionTest == "Ruby300"){
+                            rubyCount += 300;
+                            }
 
-                        if(rubyCount >= 999){
-                        rubyCount = 999;
-                        RubyCountText.text = rubyCount;
-                        zelda.stageUpdate();
-                        } else {
-                        RubyCountText.text = rubyCount;
-                        zelda.stageUpdate();
-                        }
+                            if(rubyCount >= 999){
+                            rubyCount = 999;
+                            RubyCountText.text = rubyCount;
+                            zelda.stageUpdate();
+                            } else {
+                            RubyCountText.text = rubyCount;
+                            zelda.stageUpdate();
+                            }
+                            // Prevent adding more than once
+                            objectCountUpdated = true;
+                            collisionTest = null;
+                            console.log("SCORE! " + rubyCount);
 
-                    }
+                        }
+                    } else {}
+
 	        break;
 	        case "Bomb0":
-                console.log("Collision Event Success");
+//                console.log("Collision Event Success");
                 if(HeroPlay0.x.between((rand_no - acceptibleRadius), rand_no) || HeroPlay0.x.between((rand_no + acceptibleRadius), rand_no) &&
                 HeroPlay0.y.between((rand_no2 - acceptibleRadius), rand_no2) || HeroPlay0.y.between((rand_no2 + acceptibleRadius), rand_no2)){
-                console.log("SCORE!");
-                stage.removeChild(DropSpecificItem);
 
-                // Update Bomb Wallet -
-                // This handles 1
-                if(collisionTest == "Bomb0") {
-                bombCount = bombCount + 1;
+                    // Remove item
+                    // If character holds still, item will continue to add
+                    // Change Drop Object Coordinates to prevent this
+                    stage.removeChild(DropSpecificItem);
+                    rand_no, rand_no2 = 0;
+
+
+                    // Update Bomb Wallet -
+                    // This handles 1
+                if(!objectCountUpdated){
+                    if(collisionTest == "Bomb0") {
+                        bombCount++;
+
+                     } else {}
+
                     if(bombCount >= 20){
-                    bombCount = 20;
-                    BombCountText.text = bombCount;
-                    zelda.stageUpdate();
-                    } else {
-                    BombCountText.text = bombCount;
-                    zelda.stageUpdate();
+                         bombCount = 20;
+                         BombCountText.text = bombCount;
+                         zelda.stageUpdate();
+                     } else {
+                         BombCountText.text = bombCount;
+                         zelda.stageUpdate();
+                     }
+                    // Prevent adding more than once
+                    objectCountUpdated = true;
+                    collisionTest = null;
+                    console.log("SCORE! " + rubyCount);
                     }
-                }
+
+	            } else {}
 	        break;
 
-
-	     }
 	     }
          }
 	},
@@ -360,15 +393,20 @@ var zelda = {
         }
 
 
-      }
+      },
+
+    printControls: function(){
+        var controlsCurrently = "Movement:Arrow Keys\nAttack: Space\n \nDrop Item: p\nFall Link: w";
+        alert("Current Controls\n----------------------\n" + controlsCurrently);
+    }
 };
 
 var mainVars = {
     magickBar: function(){
-        return [MagicBarContainerTopLeft, MagicBarContainerTopRight,
-                                MagicBarContainerMiddleLeft, MagicBarContainerMiddleRight,
-                                MagicBarContainerMiddleLeft0, MagicBarContainerMiddleRight0,
-                                MagicBarContainerBottomLeft, MagicBarContainerBottomRight];
+                return [MagicBarContainerTopLeft, MagicBarContainerTopRight,
+                       	                        MagicBarContainerMiddleLeft, MagicBarContainerMiddleRight,
+                       	                       MagicBarContainerMiddleLeft0, MagicBarContainerMiddleRight0,
+                       	                        MagicBarContainerBottomLeft, MagicBarContainerBottomRight];
     },
     selectedItemBar: function(){
         return [SelectedItemTopLeftSprite, SelectedItemTopRightSprite,

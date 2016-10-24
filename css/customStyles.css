@@ -32,3 +32,11 @@ canvas {
     margin: 0 auto;
     padding: 2px;
 }
+
+.on {
+    display: block;
+}
+
+.off {
+    display: none;
+}
