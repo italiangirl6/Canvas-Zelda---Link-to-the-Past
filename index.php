@@ -1,6 +1,6 @@
 <?php
 $name	 = "Canvas Legend of Zelda - A Link to the Past"; 
-$version = "0.0.3";
+$version = "0.0.4";
 # echo "Canvas Mess!";
 
 ?>
@@ -10,11 +10,8 @@ $version = "0.0.3";
 <title><?php echo $name, " ", $version; ?></title>
 
 <!-- Game Design Engines -->
-    <!-- BitmapAnimation is Deprecated !
-    // BitmapAnimation is deprecated in favour of Sprite. See VERSIONS file for info on changes.
-    // For now using 0.7.0 -->
    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-   <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+   <script src="js/tweenjs.js"></script>
 
 <link href="fonts/LinkToPastFont_Snes.ttf" rel="stylesheet" type="text/css" />
 <link href="css/customStyles.css" rel="stylesheet" type="text/css" />
@@ -27,8 +24,6 @@ $version = "0.0.3";
 
 <script src="js/engine.js"></script>
 <script src="js/controls.js"></script>
-
-
 
 <!-- Init -->
     <script>
@@ -51,12 +46,14 @@ function init() {
 zelda.init();
 
 // *************** Add Objects to Canvas *************************
+
 zelda.stageTilesets();
 zelda.stageHeader();
 
 zelda.characterLoad();
 
 // Misc
+zelda.camera();
 zelda.controls();
 }
 

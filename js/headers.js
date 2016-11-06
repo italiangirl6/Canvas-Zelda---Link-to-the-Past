@@ -5,6 +5,8 @@ var ItemsPath = "./img/tilesets/Items.png";
 // *************** Header Base ********************
     var headerBar
 
+//    currentMap = new createjs.Sprite(tilesetSheet);
+
 // *************** Magic Bar***********************
 	var BarY = 1;
 	var BarX = -16;
@@ -246,6 +248,88 @@ var headLoader = {
             // Add Items to Board
             stage.addChild(LifeHeaderText, RubyCountText, BombCountText, ArrowCountText,
                            RubyItemHeaderSprite, BombItemHeaderSprite, ArrowItemHeaderSprite);
+            },
+    MoveMenuBarX: function(movement){
+        // Top
+        MagicBarContainerTopLeft.x += movement;
+        MagicBarContainerTopRight.x += movement;
+
+        // Middle 1
+        MagicBarContainerMiddleLeft.x += movement;
+        MagicBarContainerMiddleRight.x += movement;
+
+        // Middle 2
+        MagicBarContainerMiddleLeft0.x += movement;
+        MagicBarContainerMiddleRight0.x += movement;
+
+        // Bottom
+        MagicBarContainerBottomLeft.x += movement;
+        MagicBarContainerBottomRight.x += movement;
+
+        // Item Selected
+        SelectedItemTopLeftSprite.x += movement;
+        SelectedItemTopRightSprite.x += movement;
+        SelectedItemBottomLeftSprite.x += movement;
+        SelectedItemBottomRightSprite.x += movement;
+
+        // Item in Tray
+        SelectedItem.x += movement;
+
+        // Rupees, Arrows & Boombs
+        RubyItemHeaderSprite.x += movement;
+        BombItemHeaderSprite.x += movement;
+        ArrowItemHeaderSprite.x += movement;
+                    LifeHeaderText.x += movement;
+                    RubyCountText.x += movement;
+                    BombCountText.x += movement;
+                    ArrowCountText.x += movement;
+
+        // Debugger
+        if(debugModOn){
+            circle.x = MagicBarContainerTopLeft.x;
+            console.log("Circle X: " + circle.x);
+        }
+    },
+    MoveMenuBarY: function(movement){
+            // Top
+            MagicBarContainerTopLeft.y += movement;
+            MagicBarContainerTopRight.y += movement;
+
+
+            // Middle 1
+            MagicBarContainerMiddleLeft.y += movement;
+            MagicBarContainerMiddleRight.y += movement;
+
+            // Middle 2
+            MagicBarContainerMiddleLeft0.y += movement;
+            MagicBarContainerMiddleRight0.y += movement;
+
+            // Bottom
+            MagicBarContainerBottomLeft.y += movement;
+            MagicBarContainerBottomRight.y += movement;
+
+            // Item Selected
+            SelectedItemTopLeftSprite.y += movement;
+            SelectedItemTopRightSprite.y += movement;
+            SelectedItemBottomLeftSprite.y += movement;
+            SelectedItemBottomRightSprite.y += movement;
+
+            // Item in Tray
+            SelectedItem.y += movement;
+
+            // Rupees, Arrows & Boombs
+            RubyItemHeaderSprite.y += movement;
+            BombItemHeaderSprite.y += movement;
+            ArrowItemHeaderSprite.y += movement;
+                    LifeHeaderText.y += movement;
+                    RubyCountText.y += movement;
+                    BombCountText.y += movement;
+                    ArrowCountText.y += movement;
+            // Debugger
+            if(debugModOn){
+               circle.y =  SelectedItemBottomLeftSprite.y + 16;
+               console.log("Circle Y: " + circle.y);
             }
+    }
 
 };

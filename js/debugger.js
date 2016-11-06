@@ -14,7 +14,7 @@ var zeldaDebugger = {
     },
 
     // Used to highlight area
-    HighlightObject: function(){
+    HighlightObject: function(target){
 
     // Change button to remove Circle if added
 //    document.getElementById("debugButton").onclick = zeldaDebugger.DebuggerOff;
@@ -26,9 +26,27 @@ var zeldaDebugger = {
         var shiftCircleXY = 42.6;
         circle.graphics.beginStroke("#FFF").drawCircle(0, 0, 30);
 
+        var followObject = true;
+
+        // Setup debug for specific object
+        target = target.toLowerCase();
+        switch(target){
+            case "link":
+                target = [HeroXCoordinates, HeroYCoordinates, Hero0Sprite];
+                break;
+            case "map":
+                target = [currentMap.parent.x, currentMap.parent.y, currentMap.parent];
+                followObject = false;
+                break;
+        }
         //Set position of Shape instance.
-        circle.x = HeroXCoordinates + shiftCircleXY;
-        circle.y = HeroYCoordinates + shiftCircleXY;
+        if(!followObject){
+            circle.x = HeroXCoordinates + shiftCircleXY;
+            circle.y = HeroYCoordinates + shiftCircleXY;
+        } else {
+            circle.x = target[0] + shiftCircleXY;
+            circle.y = target[1] + shiftCircleXY;
+        }
 
      // Create Text Stats
          var shiftTextXY = 30;
@@ -37,19 +55,28 @@ var zeldaDebugger = {
          // Add Text if you have not yet.
          // If you have just update the stats
          if(!addedDebugObjects){
-         xCoord = new createjs.Text("X: " + HeroXCoordinates, fontTextSize + "px Arial", "#FFF");
-         yCoord = new createjs.Text("Y: " + HeroYCoordinates, fontTextSize + "px Arial", "#FFF");
+            xCoord = new createjs.Text("X: " + target[0], fontTextSize + "px Arial", "#FFF");
+            yCoord = new createjs.Text("Y: " + target[1], fontTextSize + "px Arial", "#FFF");
+            frameRateChar = new createjs.Text("FPS: " + target[2].framerate, fontTextSize + "px Arial", "#FFF");
          } else {
-         xCoord.text = "X: " + HeroXCoordinates;
-         yCoord.text = "Y: " + HeroYCoordinates;
-         zelda.stageUpdate();
+            xCoord.text = "X: " + target[0];
+            yCoord.text = "Y: " + target[1];
+            frameRateChar.text = "FPS: " + target[2].framerate;
+            zelda.stageUpdate();
          }
 
-
-         xCoord.x = (circle.x + 2) + shiftTextXY;
-         xCoord.y = (circle.y - 2) - (shiftTextXY + 6);
-         yCoord.y = xCoord.y + (shiftTextXY / 2);
-         yCoord.x = xCoord.x;
+         // Lock-on Object
+         if(!followObject){
+            xCoord.x = (circle.x + 2) + shiftTextXY;
+            xCoord.y = (circle.y - 2) - (shiftTextXY + 6);
+            yCoord.y = xCoord.y + (shiftTextXY / 2);
+            yCoord.x = xCoord.x;
+         } else {
+            xCoord.x = (circle.x + 2) + shiftTextXY;
+            xCoord.y = (circle.y - 2) - (shiftTextXY + 6);
+            yCoord.y = xCoord.y + (shiftTextXY / 2);
+            yCoord.x = xCoord.x;
+         }
 
         // If Added Objects Do not add again
         if(!addedDebugObjects){
@@ -61,7 +88,6 @@ var zeldaDebugger = {
 
         //Update stage will render next frame
         stage.update();
-
     },
 
     // Remove Debug from screen
@@ -76,7 +102,7 @@ var zeldaDebugger = {
 
     DebugOn: function(){
         document.getElementById("removeDebugButton").setAttribute("class", "subButtons on");
-         document.getElementById("debugButton").setAttribute("class", "subButtons off");
+        document.getElementById("debugButton").setAttribute("class", "subButtons off");
         debugModOn = true;
         addedDebugObjects = false;
     },

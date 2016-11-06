@@ -121,6 +121,24 @@ function checkKeyDown(e) {
 				// HeroPlay0.gotoAndPlay("Hero0WalkLeft");
 		 		HeroXCoordinates = HeroPlay0.x += -charWalkSpeed;
 				charAnimation = "Hero0WalkLeft";
+
+                // Set Camera
+                // Varable in Engine>Zelda>Camera
+                rectangle.x = rectangle.x -= charWalkSpeed;
+
+                // Pan Map & Sync HeaderBar
+
+                // Set Map
+                // We also check the coordinates
+                // If less or equal to Negative Seventy Five, that will show canvas
+                // Set to Negative Seventy Five to prevent
+                if(currentMap.parent.x.between(59, 63)){
+                    currentMap.parent.x = 60;
+                } else {
+                    currentMap.parent.x = currentMap.parent.x += charWalkSpeed;
+                    headLoader.MoveMenuBarX(-charWalkSpeed);
+                }
+
 		break;
 		
 		case 39: // Right Arrow Key Pressed 
@@ -128,6 +146,22 @@ function checkKeyDown(e) {
 //		  		 console.log("Hero X: "+ HeroXCoordinates);
 		  		 HeroXCoordinates = HeroPlay0.x += charWalkSpeed;
 		 		 charAnimation = "Hero0WalkRight";
+
+		 		 // Set Camera
+                 // Varable in Engine>Zelda>Camera
+                 rectangle.x = rectangle.x += charWalkSpeed;
+
+                // Set Map
+                // We also check the coordinates
+                // If greater or equal to Sixty, that will show canvas
+                // Set to Sixty to prevent
+                if(currentMap.parent.x.between(-73, -78)){
+                    currentMap.parent.x = -75;
+                } else {
+                    currentMap.parent.x = currentMap.parent.x += -charWalkSpeed;
+                    headLoader.MoveMenuBarX(charWalkSpeed);
+                }
+
 		break;
 		
 		case 40: // Down Arrow Key Pressed 
@@ -136,6 +170,22 @@ function checkKeyDown(e) {
 		  		 HeroYCoordinates = HeroPlay0.y += charWalkSpeed;
 //		  		 console.log("Hero y: "+ HeroYCoordinates);
                 charAnimation = "Hero0WalkDown";
+
+                // Set Camera
+                // Varable in Engine>Zelda>Camera
+                rectangle.y = rectangle.y += charWalkSpeed;
+
+                  // Set Map
+                  // We also check the coordinates
+                  // If less or equal to zero, that will show canvas
+                  // Set to Zero to prevent
+                  if(currentMap.parent.y <= 0){
+                    currentMap.parent.y = 0;
+                  } else {
+                    currentMap.parent.y = currentMap.parent.y += -charWalkSpeed;
+                    headLoader.MoveMenuBarY(charWalkSpeed);
+                  }
+
 		break;
 		
 		case 38: // Up Arrow Key Pressed 
@@ -143,6 +193,22 @@ function checkKeyDown(e) {
                 HeroYCoordinates = HeroPlay0.y;
 		 		HeroYCoordinates = HeroPlay0.y += -charWalkSpeed;
 		 		charAnimation = "Hero0WalkUp";
+
+                // Set Camera
+                // Varable in Engine>Zelda>Camera
+                rectangle.y = rectangle.y += -charWalkSpeed;
+
+                // Set Map
+                // We also check the coordinates
+                // If greater or equal to Twenty, that will show canvas
+                // Set to Twenty to prevent
+                if(currentMap.parent.y >= 20){
+                    currentMap.parent.y = 20;
+                } else {
+                    currentMap.parent.y = currentMap.parent.y += charWalkSpeed;
+                    headLoader.MoveMenuBarY(-charWalkSpeed);
+                }
+
 		break;
 	}
 	// Handling Multiple Keys
@@ -150,8 +216,13 @@ function checkKeyDown(e) {
 			if(keys[40] && keys[39]){
 //				console.log("Down & Right key was pressed");
                 if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
-                HeroPlay0.y += charWalkSpeed;
-                HeroPlay0.x += charWalkSpeed;
+                    HeroPlay0.y += charWalkSpeed;
+                    HeroPlay0.x += charWalkSpeed;
+
+                    // Set Camera
+                    // Varable in Engine>Zelda>Camera
+                        rectangle.y += charWalkSpeed;
+                        rectangle.x += charWalkSpeed;
                 }
 			 	charAnimation = "Hero0WalkDown";
 			}
@@ -160,27 +231,48 @@ function checkKeyDown(e) {
 			if(keys[40] && keys[37]){
 //				console.log("Down & Left key was pressed");
                 if(HeroYCoordinates == 300 || HeroXCoordinates == (-80)){} else {
-                HeroPlay0.y += (charWalkSpeed - 1);
-                HeroPlay0.x += (-charWalkSpeed - 1);
+                    HeroPlay0.y += (charWalkSpeed - 1);
+                    HeroPlay0.x += (-charWalkSpeed - 1);
+
+                    // Set Camera
+                    // Varable in Engine>Zelda>Camera
+                        rectangle.y += (charWalkSpeed - 1);
+                        rectangle.x += (-charWalkSpeed - 1);
                 }
 			 	charAnimation = "Hero0WalkDown";
+
+			 	// Set Map
+//                headLoader.MoveMenuBarY((charWalkSpeed - 1));
+//                headLoader.MoveMenuBarX((-charWalkSpeed - 1);
+
 			}
 			
 			// Diagnal up Right
 			if(keys[38] && keys[39]){
 //				console.log("Up & Right key was pressed");
                 if(HeroXCoordinates == 430 || HeroXCoordinates > 430 || HeroYCoordinates == -65 || HeroYCoordinates < -65){} else {
-			 	HeroPlay0.y += -charWalkSpeed;
-			 	HeroPlay0.x += charWalkSpeed;
+                    HeroPlay0.y += -charWalkSpeed;
+                    HeroPlay0.x += charWalkSpeed;
+
+                    // Set Camera
+                    // Varable in Engine>Zelda>Camera
+                            rectangle.y += -charWalkSpeed;
+                            rectangle.x += charWalkSpeed;
                 }
 			 	charAnimation = "Hero0WalkUp";
 			}
+
 			// Diagnal up Left
 			if(keys[38] && keys[37]){
 //				console.log("Up & Left key was pressed");
                 if(HeroXCoordinates == 430 || HeroYCoordinates == -65){} else {
                 HeroPlay0.y += -charWalkSpeed;
                 HeroPlay0.x += -charWalkSpeed;
+
+                // Set Camera
+                // Varable in Engine>Zelda>Camera
+                        rectangle.y += -charWalkSpeed;
+                        rectangle.x += -charWalkSpeed;
                 }
 			 	charAnimation = "Hero0WalkUp";
 			}
@@ -190,7 +282,10 @@ function checkKeyDown(e) {
 			if(charAnimation != HeroPlay0.currentAnimation){
 				HeroPlay0.gotoAndPlay(charAnimation);
 			}
-			
+    // Set Camera
+    // Varable in Engine>Zelda>Camera
+        bullseye.x = rectangle.x;
+        bullseye.y = rectangle.y;
 }
 
 // Key Pressed

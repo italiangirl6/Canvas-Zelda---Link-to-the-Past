@@ -1,180 +1,58 @@
-
 var zelda = {
 
     // *************** Run Engine
-	init: function() {
 
-		// Find Canvas Tag
-		stage = new createjs.Stage( "myCanvas");
+    camera: function(){
+            rectangle = new createjs.Shape();
+            bullseye = new createjs.Shape();
+            var shiftCircleXY = 42.6;
+            var composure = 186;
+            var offShift = 19;
 
-		// The Tick
-		createjs.Ticker.setInterval(11);
-		createjs.Ticker.setFPS(11);
-		createjs.Ticker.addEventListener("tick", handleTick);
-		function handleTick(event) {
-            // Actions carried out each tick (aka frame)
-            zelda.stageUpdate();
+            // Camera should stay hidden from player
+            // Used for enemies to detect link near by
+            // Pan screen when at spot on canvas
+            displayCamera = false;
 
-            // Initiate Collision
-            window.addEventListener("Collide", zelda.collision());
+            rectangle.graphics
+                           .beginStroke("#FFF")
+                           .setStrokeStyle(2)
+                           .setStrokeDash([18,10], 1)
+                           .drawRect(0, 0, composure, composure)
+                           .endStroke();
+              //Set position of Shape instance.
+                    rectangle.x = HeroXCoordinates / 2 + offShift;
+                    rectangle.y = HeroYCoordinates / 2 + offShift;
 
-            // Check Debug Mode
-            if(typeof debugModOn == 'undefined'){
-            debugModOn = false;
-            addedDebugObjects = false;
-            }
-            if(debugModOn){
-                zeldaDebugger.HighlightObject();
-            } else  {
-            }
+            // Horizontal
+           bullseye.graphics
+                        .beginStroke("#FFF")
+                        .setStrokeStyle(2)
+                        .moveTo(composure - 13, (rectangle.y / 2) + 42)
+                        .lineTo(13, (rectangle.y / 2) + 42)
+                        .endStroke();
 
-             if (!event.paused) {
-                 // Actions carried out when the Ticker is not paused.
-             }
-		}
-	},
-
-    stageUpdate: function(){
-//        console.log("Updating Stage");
-        stage.update();
+            // Verticle
+            bullseye.graphics
+                        .beginStroke("#FFF")
+                        .setStrokeStyle(2)
+                        .moveTo(92, composure - 13)
+                        .lineTo((rectangle.x / 2) + 49, 13)
+                        .endStroke();
+           bullseye.x = rectangle.x;
+           bullseye.y = rectangle.y;
+           stage.addChild(rectangle, bullseye);
+           if(!displayCamera){
+                rectangle.visible = false;
+                bullseye.visible = false;
+           } else {}
     },
-
-    // Adds event listeners for keyboard strokes
-	controls: function() {
-	// Dependant controls.js
-	window.addEventListener("keydown", checkKeyDown);
-	window.addEventListener("keypress", checkKeyPress);
-	window.addEventListener("keyup", checkKeyUp);
-	},
-
-    // Set proper variables for stage to load
-	stageSetup: function(){
-
-	// Setup Variables
-    var stage, TileSets;
-
-     // Header
-     var rubyCount, bombCount, Hearts0, Hearts1, Hearts1;
-     var MagicBarContainerTop, MagicBarContainerBottom;
-
-     // Positioning (Currently drop Item only)
-     var rand_no, rand_no2;
-
-    // TileSets
-    var tile, map1, mapTiles, game, mapWidth, mapHeight, tileSheet,
-        tiles, cellBitmap;
-
-    // Link
-    var HeroPlay0, HeroXCoordinates, HeroYCoordinates;
-
-    // Collision
-    var collisionTest, collisionTestX, collisionTestY;
-
-    // Debug
-    var debugModOn, addedDebugObjects = false;
-	},
-
-    // Add or Remove Elements from Stage
-	stageLoad: function(ObjectEvent, ObjectName){
-        var objectValue;
-	    switch(ObjectName){
-	        case "magickBar":
-	            objectValue = mainVars.magickBar();
-	        break;
-	        case "selectedItemBar":
-	            objectValue = mainVars.selectedItemBar();
-            break;
-            case "rupeeBombArrowBar":
-                objectValue = mainVars.rupeeBombArrowBar();
-            break;
-	    }
-
-	    if(ObjectEvent == "add"){
-
-            // Loop through Switch Array and add
-            for(i = 0; i < objectValue.length; i++){
-                stage.addChild(objectValue[i]);
-            }
-        	stage.addChild(Hearts0, Hearts1, Hearts2);
-
-	    } else if(ObjectEvent == "remove") {
-
-            // Some objects are more than one and require array
-            // Others do not if not array just remove if array
-            // loop and remove all
-            if(Array.isArray(objectValue)){
-                // Loop through Switch Array and add
-                for(i = 0; i <= objectValue.length; i++){
-                    console.log(i + ") removing: " + objectValue[i]);
-                    stage.removeChild(objectValue[i]);
-                }
-            } else {
-                stage.removeChild(objectValue);
-            }
-
-	    } else {
-	        console.log("Unhandled Event");
-	    }
-	    zelda.stageUpdate();
-
-	},
 
 	characterLoad: function(){
         HeroPlay0.x = HeroXCoordinates;
         HeroPlay0.y = HeroYCoordinates;
 
         stage.addChild(HeroPlay0);
-	},
-
-	stageHeader: function(){
-	     // Styling
-	     var fontType   = "Return of Ganon";
-	     var fontColor  = "#FFF";
-	     var fontSize   = 16;
-	     var fontSize1  = 20;
-
-	     // Header Life
-         LifeHeaderText = new createjs.Text("------- Life -------", fontSize1 + "px " + fontType, fontColor);
-    	 LifeHeaderText.x = 336;
-    	 LifeHeaderText.y = 9;
-
-         // Header Rubies Text
-          rubyCount = 000;
-         RubyCountText = new createjs.Text(rubyCount, fontSize + "px " + fontType, fontColor);
-         RubyCountText.x = 116;
-         RubyCountText.y = 29;
-
-         // Header Bombs Text
-         bombCount = 00;
-         BombCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
-         BombCountText.x = RubyCountText.x + 46;
-         BombCountText.y = RubyCountText.y;
-
-         // Header Arrows Text
-         var ArrowCount = 00;
-         ArrowCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
-         ArrowCountText.x = BombCountText.x + 38;
-         ArrowCountText.y = RubyCountText.y;
-
-         // Load Magic Bar Container:
-         headLoader.Load_MagicBarContainer(0, 0);
-
-         // Load Item Selected Container
-         headLoader.LoadHeader_ItemContainer();
-
-         // Load Item Header Icons
-         headLoader.LoadHeader_ItemsCounters();
-
-         // engine.js & characters.js - How Main Character is Printed & Walks
-         HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
-
-         // headers.js - Hearts Section
-         Hearts0 = new createjs.Sprite(HeroSpriteHearts0, "HeartFull");
-         Hearts1 = new createjs.Sprite(HeroSpriteHearts1, "HeartHalf");
-         Hearts2 = new createjs.Sprite(HeroSpriteHearts2, "HeartEmpty");
-
-         // TEMP
-
 	},
 
 	collision: function(collisionEvent){
@@ -214,7 +92,7 @@ var zelda = {
                             RubyCountText.text = rubyCount;
                             zelda.stageUpdate();
                             } else {
-                            RubyCountText.text = rubyCount;
+                            RubyCountText.text = paddingNumber(rubyCount);
                             zelda.stageUpdate();
                             }
                             // Prevent adding more than once
@@ -242,7 +120,7 @@ var zelda = {
                     // This handles 1
                 if(!objectCountUpdated){
                     if(collisionTest == "Bomb0") {
-                        bombCount++;
+                       paddingNumber(bombCount++);
 
                      } else {}
 
@@ -251,7 +129,7 @@ var zelda = {
                          BombCountText.text = bombCount;
                          zelda.stageUpdate();
                      } else {
-                         BombCountText.text = bombCount;
+                         BombCountText.text = paddingNumber(bombCount);
                          zelda.stageUpdate();
                      }
                     // Prevent adding more than once
@@ -267,7 +145,263 @@ var zelda = {
          }
 	},
 
-    stageTilesets: function(){
+    // Adds event listeners for keyboard strokes
+	controls: function() {
+	// Dependant controls.js
+	window.addEventListener("keydown", checkKeyDown);
+	window.addEventListener("keypress", checkKeyPress);
+	window.addEventListener("keyup", checkKeyUp);
+	},
+
+	init: function() {
+
+		// Find Canvas Tag
+		stage = new createjs.Stage( "myCanvas");
+
+		// The Tick
+		createjs.Ticker.setInterval(11);
+		createjs.Ticker.setFPS(11);
+		createjs.Ticker.addEventListener("tick", handleTick);
+		function handleTick(event) {
+            // Actions carried out each tick (aka frame)
+            zelda.stageUpdate();
+
+            // Initiate Collision
+            window.addEventListener("Collide", zelda.collision());
+
+            // Check Debug Mode
+            if(typeof debugModOn == 'undefined'){
+            debugModOn = false;
+            addedDebugObjects = false;
+            }
+            if(debugModOn){
+
+                var targetObject = "Map";
+                zeldaDebugger.HighlightObject(targetObject);
+            } else  {
+            }
+
+             if (!event.paused) {
+                 // Actions carried out when the Ticker is not paused.
+             }
+		}
+	},
+
+	// layer initialization -
+	// This places the tiles where they should be
+	// currentMap
+    initLayer: function(layerData, tilesetSheet, tilewidth, tileheight, moveX, moveY) {
+
+
+        for ( var y = 0; y < layerData.height; y++) {
+            for ( var x = 0; x < layerData.width; x++) {
+
+                // create a new Bitmap for each cell
+                // you can pan the map using currentMap.parent.x or currentMap.parent.y
+                // Keep in mind this will pan everything else so be sure to update xy coordinates to objects
+                currentMap = new createjs.Sprite(tilesetSheet);
+
+                // layer data has single dimension array
+                var idx = x + y * layerData.width;
+                // tilemap data uses 1 as first value, EaselJS uses 0 (sub 1 to load correct tile)
+                tileLoad = layerData.data[idx] - 1;
+                currentMap.gotoAndStop(tileLoad);
+
+                // orthogonal tile positioning based on X Y order from Tiled
+                if(moveX == undefined || moveX == 0){
+                    moveX= 0;
+                } else {}
+                if(moveY == undefined || moveY == 0){
+                moveY= 0;
+                } else {}
+                currentMap.x = (x * tilewidth - x) + moveX;
+                currentMap.y = (y * tileheight) + moveY;
+
+                // Pan X & Y
+                // X Minus Pans Right
+                // Y Minus Pans Down
+                 currentMap.x = currentMap.x + -61;
+                 currentMap.y = currentMap.y - 22;
+//                        mapX = currentMap.x + 56;
+//                        mapY = currentMap.y + 17;
+
+//                currentMap.setBounds(mapX, mapY, tilewidth, tileheight);
+
+                spriteContainer.addChild(currentMap);
+
+                // Add bitmap to stage
+                stage.addChild(currentMap);
+
+            }
+        }
+
+    },
+
+    currentMapPosition: function(xAxis, yAxis){
+
+        //
+        //                currentMap.cache(currentMap.x,currentMap.y,tilewidth,tileheight);
+        //                currentMap.updateCache();
+
+                        // Pan X & Y
+                        // X Minus Pans Right
+                        // Y Minus Pans Down
+                        currentMap.x = currentMap.x + HeroXCoordinates;
+                        currentMap.y = currentMap.y - HeroYCoordinates;
+
+                        if(xAxis > 0){
+                            currentMap.x = currentMap.x + xAxis;
+                        }
+
+                        // Scale to make tilesets larger
+                        // Experimental and does not work
+                        // currentMap.scaleX = 2;
+                        // currentMap.scaleY = 2;
+
+                        // isometrix tile positioning based on X Y order from Tiled
+                        // currentMap.x = 300 + x * tilewidth/2 - y * tilewidth/2;
+                        // currentMap.y = y * tileheight/2 + x * tileheight/2;
+
+
+                        mapX = currentMap.x;
+                        mapY = currentMap.y;
+    },
+
+    stageUpdate: function(){
+//        console.log("Updating Stage");
+        stage.update();
+    },
+
+    // Set proper variables for stage to load
+	stageSetup: function(){
+
+	// Setup Variables
+    var stage, TileSets, displayCamera;
+
+     // Header
+     var rubyCount, bombCount, Hearts0, Hearts1, Hearts1;
+     var MagicBarContainerTop, MagicBarContainerBottom;
+
+     // Positioning (Currently drop Item only)
+     var rand_no, rand_no2;
+
+    // TileSets
+    var tile, map1, mapTiles, game, mapWidth, mapHeight, tileSheet,
+        tiles, currentMap;
+
+    // Link
+    var HeroPlay0, HeroXCoordinates, HeroYCoordinates;
+
+    // Collision
+    var collisionTest, collisionTestX, collisionTestY;
+
+    // Debug
+    var debugModOn, addedDebugObjects = false;
+
+    // Tileset
+    var tilesetSheet, currentMap, mapX, mapY, tileLoad;
+	},
+
+    // Add or Remove Elements from Stage
+	stageLoad: function(ObjectEvent, ObjectName){
+        var objectValue;
+	    switch(ObjectName){
+	        case "magickBar":
+	            objectValue = mainVars.magickBar();
+	        break;
+	        case "selectedItemBar":
+	            objectValue = mainVars.selectedItemBar();
+            break;
+            case "rupeeBombArrowBar":
+                objectValue = mainVars.rupeeBombArrowBar();
+            break;
+	    }
+
+	    if(ObjectEvent == "add"){
+
+            // Loop through Switch Array and add
+            for(i = 0; i < objectValue.length; i++){
+                stage.addChild(objectValue[i]);
+            }
+
+	    } else if(ObjectEvent == "remove") {
+
+            // Some objects are more than one and require array
+            // Others do not if not array just remove if array
+            // loop and remove all
+            if(Array.isArray(objectValue)){
+                // Loop through Switch Array and add
+                for(i = 0; i <= objectValue.length; i++){
+                    console.log(i + ") removing: " + objectValue[i]);
+                    stage.removeChild(objectValue[i]);
+                }
+            } else {
+                stage.removeChild(objectValue);
+            }
+
+	    } else {
+	        console.log("Unhandled Event");
+	    }
+	    zelda.stageUpdate();
+
+	},
+
+	stageHeader: function(){
+	     // Styling
+	     var fontType   = "Return of Ganon";
+	     var fontColor  = "#FFF";
+	     var fontSize   = 16;
+	     var fontSize1  = 20;
+
+	     // Header Life
+         LifeHeaderText = new createjs.Text("------- Life -------", fontSize1 + "px " + fontType, fontColor);
+    	 LifeHeaderText.x = 336;
+    	 LifeHeaderText.y = 9;
+
+         // Header Rubies Text
+          rubyCount = 000;
+          rubyCount = rubyCount + rubyCount;
+         RubyCountText = new createjs.Text(rubyCount, fontSize + "px " + fontType, fontColor);
+         RubyCountText.x = 116;
+         RubyCountText.y = 29;
+
+         // Header Bombs Text
+         bombCount = 00;
+         bombCount = paddingNumber(bombCount);
+         BombCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
+         BombCountText.x = RubyCountText.x + 46;
+         BombCountText.y = RubyCountText.y;
+
+         // Header Arrows Text
+         var ArrowCount = 00;
+        ArrowCount = paddingNumber(ArrowCount);
+
+         ArrowCountText = new createjs.Text(bombCount, fontSize + "px " + fontType, fontColor);
+         ArrowCountText.x = BombCountText.x + 38;
+         ArrowCountText.y = RubyCountText.y;
+
+         // Load Magic Bar Container:
+         headLoader.Load_MagicBarContainer(0, 0);
+
+         // Load Item Selected Container
+         headLoader.LoadHeader_ItemContainer();
+
+         // Load Item Header Icons
+         headLoader.LoadHeader_ItemsCounters();
+
+         // engine.js & characters.js - How Main Character is Printed & Walks
+         HeroPlay0 = new createjs.Sprite(Hero0Sprite, "Hero0WalkIdleDown");
+
+         // headers.js - Hearts Section
+         Hearts0 = new createjs.Sprite(HeroSpriteHearts0, "HeartFull");
+         Hearts1 = new createjs.Sprite(HeroSpriteHearts1, "HeartHalf");
+         Hearts2 = new createjs.Sprite(HeroSpriteHearts2, "HeartEmpty");
+
+         // TEMP
+
+	},
+
+    stageTilesets: function(moveX, moveY){
 //        console.log("Loading Stage Tiles");
 
         var ObjectsPath = "./img/tilesets/MISC.png";
@@ -360,7 +494,6 @@ var zelda = {
         tiles = new Image();
         tiles.src = ObjectsPath;
 
-
         // Dimensions need to come first before initLayers
         // mapWidth = map1[0].length;
         // console.log("mapwidth: " + mapWidth);
@@ -380,13 +513,16 @@ var zelda = {
                     height : h
                 }
             };
+
             // create spritesheet
-            var tilesetSheet = new createjs.SpriteSheet(imageData);
+            tilesetSheet = new createjs.SpriteSheet(imageData);
+            spriteContainer = new createjs.Container(tilesetSheet);
+
             // loading each layer at a time
             for (var idx = 0; idx < mapData.layers.length; idx++) {
-                var layerData = mapData.layers[idx];
+                layerData = mapData.layers[idx];
                 if (layerData.type == 'tilelayer')
-                initLayer(layerData, tilesetSheet, mapData.tilewidth, mapData.tileheight);
+                zelda.initLayer(layerData, tilesetSheet, mapData.tilewidth, mapData.tileheight);
             }
              mapWidth = layerData.width;
              mapHeight = layerData.height;
@@ -399,6 +535,7 @@ var zelda = {
         var controlsCurrently = "Movement:Arrow Keys\nAttack: Space\n \nDrop Item: p\nFall Link: w";
         alert("Current Controls\n----------------------\n" + controlsCurrently);
     }
+
 };
 
 var mainVars = {
@@ -419,43 +556,11 @@ var mainVars = {
     }
 };
 
-// layer initialization
-function initLayer(layerData, tilesetSheet, tilewidth, tileheight) {
-    for ( var y = 0; y < layerData.height; y++) {
-        for ( var x = 0; x < layerData.width; x++) {
-            // create a new Bitmap for each cell
-            cellBitmap = new createjs.Sprite(tilesetSheet);
-
-            // layer data has single dimension array
-            var idx = x + y * layerData.width;
-            // tilemap data uses 1 as first value, EaselJS uses 0 (sub 1 to load correct tile)
-            cellBitmap.gotoAndStop(layerData.data[idx] - 1);
-            // orthogonal tile positioning based on X Y order from Tiled
-            cellBitmap.x = (x * tilewidth - x);
-            cellBitmap.y = (y * tileheight);
-
-            // Pan X & Y
-            // X Minus Pans Right
-            // Y Minus Pans Down
-            cellBitmap.x = cellBitmap.x - 130;
-            cellBitmap.y = cellBitmap.y - 25;
-
-            // Scale to make tilesets larger
-            // Experimental and does not work
-            // cellBitmap.scaleX = 2;
-            // cellBitmap.scaleY = 2;
-
-            // isometrix tile positioning based on X Y order from Tiled
-            // cellBitmap.x = 300 + x * tilewidth/2 - y * tilewidth/2;
-            // cellBitmap.y = y * tileheight/2 + x * tileheight/2;
-
-            // Add bitmap to stage
-            stage.addChild(cellBitmap);
-        }
-    }
-}
-
 // Find the range between two numbers - taken from stackoverflow (can't remember where)
 Number.prototype.between = function(first,last){
     return (first < last ? this >= first && this <= last : this >= last && this <= first);
+}
+
+function paddingNumber(number){
+    return (number < 10 ? '0': '') + number;
 }
